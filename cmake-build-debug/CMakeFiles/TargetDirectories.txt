@@ -1,0 +1,2 @@
+/users/home/alumnes/LS/jordi.sabanes/UNO/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/users/home/alumnes/LS/jordi.sabanes/UNO/cmake-build-debug/CMakeFiles/edit_cache.dir
