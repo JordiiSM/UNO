@@ -171,41 +171,43 @@ void VER_mano(Cartlist *c,Baraja *b,int *chupate){
     }
     CARTLIST_Go_First(c);
 }
-int Comprueba_Carta(Baraja *b, Carta *c, int *chupate){
+int Comprueba_Carta(Baraja *b, Carta *c, int *chupate) {
 
-    switch (b->c->carta.especial){
+    switch (b->c->carta.especial) {
         case 0:
-            if(*chupate == 0) {
+            if (*chupate == 0) {
                 if ((strcmp(b->c->carta.color, c->color) == 0) || (b->c->carta.num == c->num) || (c->especial == 4) ||
                     (c->especial == 5)) {
                     return OK;
                 } else {
                     return ERROR;
                 }
-            }else{
+            } else {
                 return ERROR;
             }
         case 1:
-            if(*chupate == 0) {
+            if (*chupate == 0) {
                 if ((strcmp(b->c->carta.color, c->color) == 0) || (c->especial == 4) || (c->especial == 5)) {
                     return OK;
                 } else {
                     return ERROR;
                 }
-            }else{
-                return  ERROR;
+            } else {
+                return ERROR;
             }
 
         case 2:
-            if(*chupate == 0) {
-                if ((strcmp(b->c->carta.color, c->color) == 0) || (c->especial == 4) || (c->especial == 5)) {
+            if (*chupate == 0) {
+                if ((strcmp(b->c->carta.color, c->color) == 0) || (c->especial==2) ||(c->especial == 4) || (c->especial == 5)) {
                     return OK;
-                } else {
-                    return ERROR;
                 }
-            }else{
-                return ERROR;
+            } else if (b->c->carta.especial == 2 || c->especial == 2) {
+
+                return OK;
             }
+            return ERROR;
+
+
         case 3:
             if(*chupate == 0){
                 if((strcmp(b->c->carta.color, c->color) == 0) || (c->especial == 4) || (c->especial == 5)){
@@ -246,26 +248,29 @@ int Comprueba_Carta(Baraja *b, Carta *c, int *chupate){
 void Play_Card(Baraja *b, Cartlist *c, int ncarta,int chupate) {
     int i;
     int comp = 3;
-
+    CARTLIST_Go_First(c);
     while (comp != OK){
         for (i = 1; i < ncarta; i++) {
             CARTLIST_Next(c);
         }
+        printf("Chupate ---------> %d\n",chupate);
+        printf("intentando jugar la carta %d \n",ncarta);
     comp = Comprueba_Carta(b, &c->pdicard->c, &chupate);
     if (comp == ERROR) {
-        printf("Esta carta no se puede jugar, escoge otra: ");
+        View_Cart(c->pdicard->c);
+        printf(" Esta carta no se puede jugar, escoge otra: ");
         scanf("%d",&ncarta);
         printf("\n");
         Hand_GoFirst(c);
     }
 
 }
-            PILA_push(b, c->pdicard->c);
+    PILA_push(b, c->pdicard->c);
     //printf("Has tirado la carta ");
     View_Cart(b->c->carta);
     printf("\n");
     Delete_Card(c);
-    Hand_GoFirst(c);
+    CARTLIST_Go_First(c);
 
 }
 
@@ -296,7 +301,6 @@ void Hand_GoFirst(Cartlist *l){
 }
 void Info_Bots(Playerlist *l, int turno){
     int i;
-    printf("\n\n\nESTAMOS EN EL TURNO %d LE TOCA A %s\n",turno,l->pdi->p->name);
     printf("----------------------------------------------\n");
     PLIST_Go_First(l);
     for(i = 1 ; i <= l->nplayers ; i++){
@@ -310,12 +314,16 @@ void Info_Bots(Playerlist *l, int turno){
         }
         PLIST_Next(l);
     }
+
     PLIST_Go_First(l);
     //if( != ) {
         for (i = 2; i <= turno; i++) {
             PLIST_Next(l);
       //  }
     }
+    printf("----------------------------------------------\n");
+    printf("ESTAMOS EN EL TURNO %d LE TOCA A %s\n",turno,l->pdi->p->name);
+    printf("----------------------------------------------\n\n");
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -327,14 +335,6 @@ void Comprobar_Especial(Carta c, int *chupate, int *sentido, int *prohibido){
             }
             if(*prohibido == 0){
                 *prohibido = 1;
-            }
-            break;
-        case 2:
-            if(*sentido == 1){
-            *sentido=0;
-            }
-            if(*sentido == 0){
-                *sentido = 1;
             }
             break;
 
@@ -361,4 +361,13 @@ void Comprobar_Mano(Baraja *b,Cartlist *l, int *chupate){
         //Robar_Carta();
     }
 
+}
+void Comprobar_Sentido(Carta c, int *sentido){
+    if(c.especial == 2) {
+        if (*sentido == 1) {
+            *sentido = 0;
+        }else{
+            *sentido = 1;
+        }
+    }
 }

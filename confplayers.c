@@ -108,7 +108,7 @@ int PLIST_Next(Playerlist *list){
         return OK;
     }
 }
-/*
+
 //----------------PASAR AL ELEMENTO ANTERIOR DE LA LISTA ---------------
 int PLIST_previous(Playerlist *list){
     if(list->pdi->previous == list->first){  //estem al final
@@ -118,6 +118,7 @@ int PLIST_previous(Playerlist *list){
         return OK;
     }
 }
+/*
 //---------------BORRAR LA LISTA -------------------
 void PLIST_Destroy(Playerlist *list){
     PLIST_Go_First(list);
@@ -138,37 +139,45 @@ int Comprueba_Carta_Bot(Cartlist *list, Baraja *b,Baraja *baraja, int *chupate, 
     CARTLIST_Go_First(list);
     for(i = 0 ; i < list->ncartas ; i++) {
             flag = Comprueba_Carta(b,&list->pdicard->c,chupate);
-
             if(flag == OK){
                 cont++;
             }
+
         CARTLIST_Next(list);
 
     }
+
 
     CARTLIST_Go_First(list);
     //printf("Puede jugar %d cartas\n",cont);
     if(cont > 0) {
             aux = Comprobar_Ceros(b, list, ncarta, chupate);
             if (aux == OK){
+                printf("intentando jugar la carta  ZEROS %d \n",*ncarta);
                 return OK;
             }
             CARTLIST_Go_First(list);
             aux = Comprobar_Color(b, list, b->c->carta, ncarta, chupate);
             if (aux == OK){
+                printf("intentando jugar la carta COLOR %d \n",*ncarta);
                 return OK;
             }
             CARTLIST_Go_First(list);
-                for(int j = 0; j < list->ncartas ; j++){
+                /*for(int j = 1; j <= list->ncartas ; j++){
                     flag = Comprueba_Carta(b,&list->pdicard->c,chupate);
                     if(flag == OK){
+                        printf("intentando jugar la carta OTROS %d \n",*ncarta);
                         *ncarta = j;
                         return OK;
                     }
-                }
+                }*/
+            aux = Comprobar_OTROS(b, list, b->c->carta, ncarta, chupate);
+            if (aux == OK){
+                printf("intentando jugar la carta OTROS %d \n",*ncarta);
+                return OK;
             }
-
-
+        CARTLIST_Go_First(list);
+            }
     if(cont == 0){
         return ERROR;
     }
@@ -180,7 +189,7 @@ int Comprobar_Ceros(Baraja *b, Cartlist *list, int *ncarta, int *chupate){
     int i=0;
     int flag;
     for(i = 1 ; i <= list->ncartas; i++) {
-       // View_Cart(list->pdicard->c);
+       View_Cart(list->pdicard->c);
         if (list->pdicard->c.num == 0) {
             flag = Comprueba_Carta(b, &list->pdicard->c, chupate);
 
@@ -188,6 +197,7 @@ int Comprobar_Ceros(Baraja *b, Cartlist *list, int *ncarta, int *chupate){
             if(flag == OK){
 
                 *ncarta = i;
+
                 CARTLIST_Go_First(list);
                 return OK;
             }else{
@@ -204,17 +214,45 @@ int Comprobar_Ceros(Baraja *b, Cartlist *list, int *ncarta, int *chupate){
 
 
 int Comprobar_Color(Baraja *b, Cartlist *list, Carta c, int *ncarta, int *chupate){
+    int flag;
     for(int i = 1 ; i <= list->ncartas; i++) {
         if (strcmp(list->pdicard->c.color,c.color)==0) {
-            //View_Cart(list->pdicard->c);
-            //printf(" - Se puede jugar\n");
-            *ncarta = i;
-            CARTLIST_Go_First(list);
-            return OK;
+            flag = Comprueba_Carta(b, &list->pdicard->c, chupate);
+
+            printf("\n");
+            if(flag == OK) {
+
+                *ncarta = i;
+
+                CARTLIST_Go_First(list);
+                return OK;
+            }
+
         }else{
             CARTLIST_Next(list);
         }
     }
+    CARTLIST_Go_First(list);
+    return ERROR;
+}
+int Comprobar_OTROS(Baraja *b, Cartlist *list, Carta c, int *ncarta, int *chupate) {
+    int flag;
+    for (int i = 1; i <= list->ncartas; i++) {
+
+        flag = Comprueba_Carta(b, &list->pdicard->c, chupate);
+
+        printf("\n");
+        if (flag == OK) {
+
+            *ncarta = i;
+
+            CARTLIST_Go_First(list);
+            return OK;
+        }
+
+        CARTLIST_Next(list);
+    }
+
     CARTLIST_Go_First(list);
     return ERROR;
 }
