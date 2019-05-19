@@ -18,6 +18,10 @@ typedef struct{
     NodeHand *lastcard;
     int ncartas;
     int cartasinicio;
+    int rojas;
+    int verdes;
+    int amarillas;
+    int azules;
 
 }Cartlist;
 #endif

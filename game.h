@@ -21,4 +21,10 @@ void View_Cart(Carta c);
 void Go_First(Cartlist *l);
 void Robar_Carta(Baraja *b, Cartlist *c);
 int Comprueba_Carta(Baraja *b, Carta *c, int *chupate);
+void Play_Card(Baraja *b, Cartlist *c, int ncarta, int chupate);
+void Delete_Card(Cartlist *l);
+void Hand_GoFirst(Cartlist *l);
+void Info_Bots(Playerlist *l, int turno);
+void Comprobar_Especial(Carta c, int *chupate, int *sentido);
+void Comprobar_Mano(Baraja *b,Cartlist *l, int *chupate);
 #endif

@@ -6,28 +6,25 @@
 #include "conf.h"
 #include "game.h"
 #include "CLIplayer.h"
+#define OK 1
+#define ERROR 0
 
 int main() {
+    int cardoption;
+    int comprueba_bot;
+    int turno = 1;
     int chupate = 0;
     int gameover = 0;
     int i = 0;
     int compilar = 1;
-    int option=0;
+    char option;
+    int sentido = 3;
+
     Baraja *baraja = malloc(sizeof(Baraja));
-    printf("%d \n",compilar);
-    compilar++;
     Baraja *pdescartes = malloc(sizeof(Baraja));
-    printf("%d \n",compilar);
-    compilar++;
     *pdescartes = PILA_crea();
-    printf("%d \n",compilar);
-    compilar++;
     *baraja = PILA_crea();
-    printf("%d \n",compilar);
-    compilar++;
     *baraja = PILA_rellenar(baraja);
-    printf("%d \n",compilar);
-    compilar++;
 
     int size = baraja->cuantos;
     char f[50]; //esto es temporal, se pasa por argumento
@@ -62,12 +59,6 @@ int main() {
     Playerlist *list = malloc(sizeof(Playerlist));
     *list = PLIST_Create();
     *list = ADD_Players("fichero_bots.uno");
-    for (i = 0; i < 2; i++) {
-       printf("Name main: %s \n",list->pdi->p->name);
-       printf("Type main: %s\n",list->pdi->p->type);
-       printf("Ncartas main: %d\n",list->pdi->p->cart.cartasinicio);
-            PLIST_Next(list);
-    }
     PLIST_Go_First(list);
     printf("----------------------------------------------\n");
     BARAJA_mix(baraja);
@@ -97,37 +88,91 @@ int main() {
     }
 */
     *list = Repartir(baraja,list);
-    printf("Numero de cartas: %d \n",list->pdi->p->cart.ncartas);
     *pdescartes = EMPEZAR(pdescartes, baraja);
-    printf("Carta encima de la mesa: ");
+    printf("## ");
     View_Cart(pdescartes->c->carta);
+    printf("##\n");
+   /* for(int x= 0 ; x< list->nplayers; x++){
+        printf("%s\n", list->pdi->p->name);
+        CARTLIST_Go_First(&list->pdi->p->cart);
+        for(int y = 0 ; y < list->pdi->p->cart.ncartas; y++){
+            View_Cart(list->pdi->p->cart.pdicard->c);
+            CARTLIST_Next(&list->pdi->p->cart);
+        }
+        PLIST_Next(list);
+    }
+    CARTLIST_Go_First(&list->pdi->p->cart);*/
+    int tempi;
     while(gameover != 1) {
-        if (strcmp(list->pdi->p->type,"jugador")==0){
-            printf("Numero de cartas: %d \n",list->pdi->p->cart.ncartas);
+        Info_Bots(list, turno);
+        Comprobar_Especial(pdescartes->c->carta,&chupate,&sentido);
+        printf("CHUPATE --> %d SENTIDO --> %d \n",chupate,sentido);
+        printf("## ");
+        View_Cart(pdescartes->c->carta);
+        printf("##\n");
+
+        if (strcmp(list->pdi->p->type, "jugador") == 0) {
+
             option = CLI_player(list->pdi->p->name);
-            PLIST_Next(list);
 
-
-            if(option == 1){
+            if (option == 'A') {
                 VER_mano(&list->pdi->p->cart, pdescartes, &chupate);
                 option = CLI_play(list->pdi->p->name);
-                        if(option == 1){
-                            option = CLI_playcard();
-                        }
-
+                if (option == 'A') {
+                    cardoption = CLI_playcard();
+                    Play_Card(pdescartes, &list->pdi->p->cart, cardoption, chupate);
+                    CARTLIST_Go_First(&list->pdi->p->cart);
+                    option = 0;
+                }
             }
-            if(option == 2){
+            if(option == 'B'){
                 Robar_Carta(baraja, &list->pdi->p->cart);
-
+                CARTLIST_Go_First(&list->pdi->p->cart);
             }
-        }
-        else{
-          PLIST_Next(list);
-          printf("Jugador tipo %s \n",list->pdi->p->type);
-        }
 
+
+        }else{
+            do {
+                printf("JUGADOR TIPO BOT \n");
+
+                comprueba_bot = Comprueba_Carta_Bot(&list->pdi->p->cart, pdescartes, baraja, &chupate, &cardoption);
+
+                if (comprueba_bot == OK) {
+                    printf("%s juega un ", list->pdi->p->name);
+
+                    Play_Card(pdescartes, &list->pdi->p->cart, cardoption, chupate);
+                    View_Cart(pdescartes->c->carta);
+                    printf("\n");
+                    CARTLIST_Go_First(&list->pdi->p->cart);
+
+
+                }
+                if (comprueba_bot == ERROR) {
+                    Robar_Carta(baraja, &list->pdi->p->cart);
+                    printf("Ha rojado EL JALEO ");
+                    View_Cart(list->pdi->p->cart.pdicard->c);
+                    printf("\n");
+                    CARTLIST_Go_First(&list->pdi->p->cart);
+                }
+
+            }while(comprueba_bot != OK);
+
+
+
+           // printf("Jugador tipo %s \n",list->pdi->p->type);
+        }
+       // printf("Nplayers %d \n",list->nplayers);
+        if(turno < list->nplayers ){
+            turno++;
+        }else{
+            turno=1;
+        }
+        PLIST_Next(list);
     }
 
-    return 0;
 
 }
+
+
+
+

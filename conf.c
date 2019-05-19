@@ -21,11 +21,12 @@ Playerlist ADD_Players(char f[50]) {
     } else {
         fgets(nplayers, 100, file);
         numplayers = atoi(nplayers);
-        printf("N players: %d \n", numplayers);
+
         list->nplayers = numplayers+1;
         for (i = 0; i < numplayers; i++) {
 
             fgets(tmp.name, 100, file);
+            tmp.name[strlen(tmp.name)-1]='\0';
             //printf("Nombre: %s \n", tmp.name);
             fgets(tmp.type, 100, file);
             //printf("Tipo: %s \n", tmp.type);
@@ -44,7 +45,7 @@ Playerlist ADD_Players(char f[50]) {
         c.cartasinicio = 7;
         //list->pdi->p->cart.ncartas = list->pdi->p->cart.cartasinicio;
         tmp.cart = c;
-        printf("Prueba\n");
+
         PLIST_Insert(list,tmp);
         fclose(file);
     }

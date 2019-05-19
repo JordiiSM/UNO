@@ -1,7 +1,8 @@
 
-#define ERROR 0;
-#define OK 1;
+#define ERROR 0
+#define OK 1
 
+#include <string.h>
 #include "confplayers.h"
 //--------------CREAR-------------------
 Playerlist PLIST_Create(){
@@ -26,21 +27,45 @@ Playerlist PLIST_Create(){
 }
 //---------------INSERTAR----------------
 int PLIST_Insert(Playerlist *list, Player player){
+
+    int i;
+    int flag = 0;
     Node *n = (Node *) malloc(sizeof(Node));    //reservamos memoria para un nodo
     Player *p = (Player *) malloc(sizeof(Player));    //reservamos para una cancion
     *p = player;
+    //Node *tmp = (Node *) malloc(sizeof(Node));
     //control de errores
     if(list->pdi == list->last){
         return ERROR;
-    }else{
+    }else {
         n->p = p;
+
+        //list->last = list->first;
+/*
+        while(strcmp(list->pdi->p->name, p->name) != 1){
+            PLIST_Next(list);
+        }
+        */
+//printf("%s\n",list->pdi->p->name);
+
+        for (i = 0; i < list->nplayers || flag == 1; i++) {
+                printf("JUGADOR %d\n",i+1);
+            if (list->pdi->p->name < p->name) {
+                printf("Ha entrado\n");
+                PLIST_Next(list);
+                } else {
+                  flag = 1;
+                 }
+            }
+
+
         n->next = list->pdi->next;
         n->previous = list->pdi;
         n->next->previous = n;
         list->pdi->next = n;
         list->pdi = n;
-
-
+        printf("INSERTADO \n");
+        PLIST_Go_First(list);
     }
     return OK;
 }
@@ -107,3 +132,78 @@ void PLIST_Destroy(Playerlist *list){
     list->first = list->last = NULL;    //asignamos null al first y last
 }
 */
+int Comprueba_Carta_Bot(Cartlist *list, Baraja *b,Baraja *baraja, int *chupate, int *ncarta){
+    int aux;
+    int cont = 0;
+    int flag = 0;
+    int jugada = 3;
+    int i;
+    CARTLIST_Go_First(list);
+    printf("HA ENTRADO!!!\n");
+    for(i = 0 ; i < list->ncartas ; i++) {
+            flag = Comprueba_Carta(b,&list->pdicard->c,chupate);
+
+            if(flag == OK){
+                cont++;
+            }
+        CARTLIST_Next(list);
+
+    }
+    CARTLIST_Go_First(list);
+    printf("Puede jugar %d cartas\n",cont);
+    if(cont > 0) {
+            aux = Comprobar_Ceros(b, list, ncarta, chupate);
+            if (aux == OK){
+                return OK;
+            }
+            CARTLIST_Go_First(list);
+            aux = Comprobar_Color(b, list, b->c->carta, ncarta, chupate);
+            if (aux == OK){
+                return OK;
+            }
+            CARTLIST_Go_First(list);
+                for(int j = 0; j < list->ncartas ; j++){
+                    flag = Comprueba_Carta(b,&list->pdicard->c,chupate);
+                    if(flag == OK){
+                        *ncarta = j;
+                        return OK;
+                    }
+                }
+            }
+
+
+    if(cont == 0){
+        return ERROR;
+    }
+    return OK;
+}
+
+int Comprobar_Ceros(Baraja *b, Cartlist *list, int *ncarta, int *chupate){
+    int i=0;
+    int flag;
+    for(i = 1 ; i <= list->ncartas; i++) {
+        if (list->pdicard->c.num == 0) {
+            flag = Comprueba_Carta(b, &list->pdicard->c, chupate);
+            if(flag == OK){
+                *ncarta = i;
+                CARTLIST_Go_First(list);
+                return OK;
+            }
+        }
+    }
+    CARTLIST_Go_First(list);
+    return ERROR;
+}
+
+
+
+int Comprobar_Color(Baraja *b, Cartlist *list, Carta c, int *ncarta, int *chupate){
+    for(int i = 1 ; i <= list->ncartas; i++) {
+        if (list->pdicard->c.color == c.color) {
+            *ncarta = i;
+            CARTLIST_Go_First(list);
+            return OK;
+        }
+    }
+    return ERROR;
+}

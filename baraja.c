@@ -11,14 +11,12 @@ Baraja PILA_crea() {
     return p;
 }
 Baraja PILA_rellenar(Baraja *p) {
-    printf("Hola\n");
     Carta c;
     int i = 0, j = 0;
 
     //creamos las cartas numero
     for (i;i<10;i++){
         c.especial = 0;
-        printf("especial OK\n");
         if(i!=0) {  //Si el numero es un 0 solo tienen que haber 4
 
             c.num = i;
@@ -35,7 +33,6 @@ Baraja PILA_rellenar(Baraja *p) {
         strcpy(c.color, "rojo");
 
         PILA_push(p, c);
-        printf("Strcpy OK\n");
         strcpy(c.color, "amarillo");
         PILA_push(p, c);
         strcpy(c.color, "verde");

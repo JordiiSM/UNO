@@ -19,17 +19,11 @@ Playerlist Repartir(Baraja *b, Playerlist *p){
         //list->cartasinicio =  p->pdi->p->cart.cartasinicio;
         *p = CARTLIST_Create(p);
        // list->cartasinicio = p->pdi->p->cart.cartasinicio;
-
-        printf("Numero Cartas inicio: %d Jugador: %d\n",p->pdi->p->cart.cartasinicio,i);
-        printf("Numero Cartas inicio: %d Jugador: %s\n",p->pdi->p->cart.cartasinicio,p->pdi->p->name);
         for (j = 0; j < p->pdi->p->cart.cartasinicio; j++) { //hasta que tenga todas las cartas asignadas
              //cambiar por funcion
             CART_Insert(&p->pdi->p->cart, &b->c->carta);
-            View_Cart(p->pdi->p->cart.pdicard->c);
-            printf("Prueba\n");
             PILA_pop(b);
             //View_Cart(p->pdi->p->cart.pdicard->p->c);
-            printf("Insertada \n");
 
             //printf("%d %s %d \n", list->pdicard->p->c->num, list->pdicard->p->c->color, list->pdicard->p->c->especial);
 
@@ -83,6 +77,16 @@ int CART_Insert(Cartlist *list, Carta *c){
         list->pdicard->next = aux;
         list->pdicard = aux;
         list->ncartas++;
+        if(strcmp(list->pdicard->c.color,"rojo")==0){
+            list->rojas++;
+        }else if(strcmp(list->pdicard->c.color,"amarillo")==0){
+            list->amarillas++;
+        }else if(strcmp(list->pdicard->c.color,"verde")==0){
+            list->verdes++;
+        }else if(strcmp(list->pdicard->c.color,"azul")==0){
+            list->azules++;
+        }
+
     }
 
     return OK;
@@ -150,18 +154,22 @@ void View_Cart(Carta c){
 void VER_mano(Cartlist *c,Baraja *b,int *chupate){
     int i;
     int option;
-    printf("%d <--- Num cartas \n", c->ncartas);
     Go_First(c);
     for(i = 0 ; i < c->ncartas ; i++){
+
+        printf("%d. ",i+1);
         View_Cart(c->pdicard->c);
         option = Comprueba_Carta(b, &c->pdicard->c, chupate);
+
         if(option == OK){
             printf(" *\n");
         }else{
             printf(" \n");
         }
+
         CARTLIST_Next(c);
     }
+    CARTLIST_Go_First(c);
 }
 int Comprueba_Carta(Baraja *b, Carta *c, int *chupate){
 
@@ -231,6 +239,116 @@ int Comprueba_Carta(Baraja *b, Carta *c, int *chupate){
                     return ERROR;
                 }
             }
+    }
+
+}
+
+void Play_Card(Baraja *b, Cartlist *c, int ncarta,int chupate) {
+    int i;
+    int comp = 3;
+
+    while (comp != OK){
+        for (i = 1; i < ncarta; i++) {
+            CARTLIST_Next(c);
+        }
+    comp = Comprueba_Carta(b, &c->pdicard->c, &chupate);
+    if (comp == ERROR) {
+        printf("Esta carta no se puede jugar, escoge otra: ");
+        scanf("%d",&ncarta);
+        printf("\n");
+        Hand_GoFirst(c);
+    }
+
+}
+            PILA_push(b, c->pdicard->c);
+    //printf("Has tirado la carta ");
+    View_Cart(b->c->carta);
+    printf("\n");
+    Delete_Card(c);
+    Hand_GoFirst(c);
+
+}
+
+void Delete_Card(Cartlist *l){
+    NodeHand *aux;
+    if (l->pdicard == l->firstcard || l->pdicard == l->lastcard) {
+        printf("\nError al eliminar, PDI situado al principio o final...");
+    } else {
+        aux = l->pdicard;
+        aux->next->previous = aux->previous;
+        aux->previous->next = aux->next;
+        l->pdicard = aux->next;
+        free(aux);
+        l->ncartas--;
+        if(strcmp(l->pdicard->c.color,"rojo")==0){
+            l->rojas--;
+        }else if(strcmp(l->pdicard->c.color,"amarillo")==0){
+            l->amarillas--;
+        }else if(strcmp(l->pdicard->c.color,"verde")==0){
+            l->verdes--;
+        }else if(strcmp(l->pdicard->c.color,"azul")==0){
+            l->azules--;
+        }
+    }
+}
+void Hand_GoFirst(Cartlist *l){
+    l->pdicard = l->firstcard->next;
+}
+void Info_Bots(Playerlist *l, int turno){
+    int i;
+    printf("ESTAMOS EN EL TURNO %d LE TOCA A %s\n\n",turno,l->pdi->p->name);
+    PLIST_Go_First(l);
+    for(i = 1 ; i <= l->nplayers ; i++){
+
+        if(i == turno) {
+           printf("%s - %d cartas         v\n", l->pdi->p->name,l->pdi->p->cart.ncartas);
+        }
+        else{
+            printf("%s - %d cartas\n", l->pdi->p->name,l->pdi->p->cart.ncartas);
+
+        }
+        PLIST_Next(l);
+    }
+    PLIST_Go_First(l);
+    //if( != ) {
+        for (i = 2; i <= turno; i++) {
+            PLIST_Next(l);
+      //  }
+    }
+}
+
+//////////////////////////////////////////////////////////////////////
+void Comprobar_Especial(Carta c, int *chupate, int *sentido){
+    switch (c.especial){
+        case 2:
+            if(*sentido == 1){
+            *sentido=0;
+            }
+            if(*sentido == 0){
+                *sentido = 1;
+            }
+
+        case 3:
+            *chupate = *chupate+2;
+            break;
+        case 5:
+            *chupate = *chupate+4;
+            break;
+    }
+}
+void Comprobar_Mano(Baraja *b,Cartlist *l, int *chupate){
+
+    int i;
+    int cont = 0;
+    int aux;
+    for(i=0 ; i<l->ncartas; i++){
+        aux = Comprueba_Carta(b,&l->pdicard->c, chupate);
+        if(aux == OK){
+            cont++;
+        }
+    }
+    if(cont > 0){
+        //Robar_Carta();
     }
 
 }

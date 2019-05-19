@@ -13,9 +13,9 @@
 
 
 int CLI_menu();
-int CLI_player(char*);
+char CLI_player(char*);
 int CLI_playcard();
-int CLI_play(char *name);
+char CLI_play(char *name);
 int CLI_robado(Baraja *b, Carta c);
 
 
