@@ -49,9 +49,7 @@ int PLIST_Insert(Playerlist *list, Player player){
 //printf("%s\n",list->pdi->p->name);
 
         for (i = 0; i < list->nplayers || flag == 1; i++) {
-                printf("JUGADOR %d\n",i+1);
             if (list->pdi->p->name < p->name) {
-                printf("Ha entrado\n");
                 PLIST_Next(list);
                 } else {
                   flag = 1;
@@ -64,7 +62,6 @@ int PLIST_Insert(Playerlist *list, Player player){
         n->next->previous = n;
         list->pdi->next = n;
         list->pdi = n;
-        printf("INSERTADO \n");
         PLIST_Go_First(list);
     }
     return OK;
@@ -133,13 +130,12 @@ void PLIST_Destroy(Playerlist *list){
 }
 */
 int Comprueba_Carta_Bot(Cartlist *list, Baraja *b,Baraja *baraja, int *chupate, int *ncarta){
-    int aux;
+    int aux = 3;
     int cont = 0;
     int flag = 0;
     int jugada = 3;
     int i;
     CARTLIST_Go_First(list);
-    printf("HA ENTRADO!!!\n");
     for(i = 0 ; i < list->ncartas ; i++) {
             flag = Comprueba_Carta(b,&list->pdicard->c,chupate);
 
@@ -149,8 +145,9 @@ int Comprueba_Carta_Bot(Cartlist *list, Baraja *b,Baraja *baraja, int *chupate, 
         CARTLIST_Next(list);
 
     }
+
     CARTLIST_Go_First(list);
-    printf("Puede jugar %d cartas\n",cont);
+    //printf("Puede jugar %d cartas\n",cont);
     if(cont > 0) {
             aux = Comprobar_Ceros(b, list, ncarta, chupate);
             if (aux == OK){
@@ -176,19 +173,28 @@ int Comprueba_Carta_Bot(Cartlist *list, Baraja *b,Baraja *baraja, int *chupate, 
         return ERROR;
     }
     return OK;
+
 }
 
 int Comprobar_Ceros(Baraja *b, Cartlist *list, int *ncarta, int *chupate){
     int i=0;
     int flag;
     for(i = 1 ; i <= list->ncartas; i++) {
+       // View_Cart(list->pdicard->c);
         if (list->pdicard->c.num == 0) {
             flag = Comprueba_Carta(b, &list->pdicard->c, chupate);
+
+            printf("\n");
             if(flag == OK){
+
                 *ncarta = i;
                 CARTLIST_Go_First(list);
                 return OK;
+            }else{
+                CARTLIST_Next(list);
             }
+        }else {
+            CARTLIST_Next(list);
         }
     }
     CARTLIST_Go_First(list);
@@ -199,11 +205,16 @@ int Comprobar_Ceros(Baraja *b, Cartlist *list, int *ncarta, int *chupate){
 
 int Comprobar_Color(Baraja *b, Cartlist *list, Carta c, int *ncarta, int *chupate){
     for(int i = 1 ; i <= list->ncartas; i++) {
-        if (list->pdicard->c.color == c.color) {
+        if (strcmp(list->pdicard->c.color,c.color)==0) {
+            //View_Cart(list->pdicard->c);
+            //printf(" - Se puede jugar\n");
             *ncarta = i;
             CARTLIST_Go_First(list);
             return OK;
+        }else{
+            CARTLIST_Next(list);
         }
     }
+    CARTLIST_Go_First(list);
     return ERROR;
 }

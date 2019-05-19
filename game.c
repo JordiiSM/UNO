@@ -296,7 +296,8 @@ void Hand_GoFirst(Cartlist *l){
 }
 void Info_Bots(Playerlist *l, int turno){
     int i;
-    printf("ESTAMOS EN EL TURNO %d LE TOCA A %s\n\n",turno,l->pdi->p->name);
+    printf("\n\n\nESTAMOS EN EL TURNO %d LE TOCA A %s\n",turno,l->pdi->p->name);
+    printf("----------------------------------------------\n");
     PLIST_Go_First(l);
     for(i = 1 ; i <= l->nplayers ; i++){
 
@@ -318,8 +319,16 @@ void Info_Bots(Playerlist *l, int turno){
 }
 
 //////////////////////////////////////////////////////////////////////
-void Comprobar_Especial(Carta c, int *chupate, int *sentido){
+void Comprobar_Especial(Carta c, int *chupate, int *sentido, int *prohibido){
     switch (c.especial){
+        case 1:
+            if(*prohibido == 1){
+                *prohibido=0;
+            }
+            if(*prohibido == 0){
+                *prohibido = 1;
+            }
+            break;
         case 2:
             if(*sentido == 1){
             *sentido=0;
@@ -327,6 +336,7 @@ void Comprobar_Especial(Carta c, int *chupate, int *sentido){
             if(*sentido == 0){
                 *sentido = 1;
             }
+            break;
 
         case 3:
             *chupate = *chupate+2;
