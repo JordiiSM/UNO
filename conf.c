@@ -45,7 +45,6 @@ Playerlist ADD_Players(char f[50]) {
         c.cartasinicio = 7;
         //list->pdi->p->cart.ncartas = list->pdi->p->cart.cartasinicio;
         tmp.cart = c;
-
         PLIST_Insert(list,tmp);
         fclose(file);
     }

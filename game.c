@@ -131,7 +131,13 @@ void Go_First(Cartlist *l){
 void View_Cart(Carta c){
         switch(c.especial) {
             case 0:
-                printf("%d %s ", c.num, c.color);
+                if(c.num == 10){
+                    printf("Cambio de color ");
+                }else if(c.num == 11){
+                    printf("Chupate 4 ");
+                }else {
+                    printf("%d %s ", c.num, c.color);
+                }
                 break;
             case 1:
                 printf("Prohibido tirar %s ",c.color);
@@ -341,8 +347,10 @@ void Comprobar_Especial(Carta c, int *chupate, int *sentido, int *prohibido){
         case 3:
             *chupate = *chupate+2;
             break;
-        case 5:
-            *chupate = *chupate+4;
+        case 0:
+            if(c.num == 11) {
+                *chupate = *chupate + 4;
+            }
             break;
     }
 }
@@ -369,5 +377,68 @@ void Comprobar_Sentido(Carta c, int *sentido){
         }else{
             *sentido = 1;
         }
+    }
+}
+int Comprobar_Cambio_Color(Baraja *b,int *color,Playerlist *p) {
+    int aux;
+    Carta c;
+    c.especial = 0;
+    if (b->c->carta.especial == 4 || b->c->carta.especial == 5) {
+        if (strcmp(p->pdi->p->type, "jugador") == 0) {
+            return 1;
+        } else {
+            if ((p->pdi->p->cart.rojas >= p->pdi->p->cart.azules) &&
+                (p->pdi->p->cart.rojas >= p->pdi->p->cart.amarillas) &&
+                (p->pdi->p->cart.rojas >= p->pdi->p->cart.verdes)) {
+                if (b->c->carta.especial == 4) {
+                    c.num = 10;
+                }
+                if (b->c->carta.especial == 5) {
+                    c.num = 11;
+                }
+
+                strcpy(c.color, "rojo");
+                printf("%s cambia de color al %s", p->pdi->p->name, c.color);
+                PILA_push(b, c);
+
+            } else if ((p->pdi->p->cart.verdes >= p->pdi->p->cart.azules) &&
+                       (p->pdi->p->cart.verdes >= p->pdi->p->cart.amarillas) &&
+                       (p->pdi->p->cart.verdes >= p->pdi->p->cart.rojas)) {
+                if (b->c->carta.especial == 4) {
+                    c.num = 10;
+                }
+                if (b->c->carta.especial == 5) {
+                    c.num = 11;
+                }
+                strcpy(c.color, "verde");
+                printf("%s cambia de color al %s", p->pdi->p->name, c.color);
+                PILA_push(b, c);
+            } else if ((p->pdi->p->cart.azules >= p->pdi->p->cart.rojas) &&
+                       (p->pdi->p->cart.azules >= p->pdi->p->cart.amarillas) &&
+                       (p->pdi->p->cart.azules >= p->pdi->p->cart.verdes)) {
+                if (b->c->carta.especial == 4) {
+                    c.num = 10;
+                }
+                if (b->c->carta.especial == 5) {
+                    c.num = 11;
+                }
+                strcpy(c.color, "azul");
+                printf("%s cambia de color al %s", p->pdi->p->name, c.color);
+                PILA_push(b, c);
+            } else if ((p->pdi->p->cart.amarillas >= p->pdi->p->cart.rojas) &&
+                       (p->pdi->p->cart.amarillas >= p->pdi->p->cart.azules) &&
+                       (p->pdi->p->cart.amarillas >= p->pdi->p->cart.verdes)) {
+                if (b->c->carta.especial == 4) {
+                    c.num = 10;
+                }
+                if (b->c->carta.especial == 5) {
+                    c.num = 11;
+                }
+                strcpy(c.color, "amarillo");
+                printf("%s cambia de color al %s", p->pdi->p->name, c.color);
+                PILA_push(b, c);
+            }
+        }
+        return 0;
     }
 }

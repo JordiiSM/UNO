@@ -39,22 +39,26 @@ int PLIST_Insert(Playerlist *list, Player player){
         return ERROR;
     }else {
         n->p = p;
+        PLIST_Go_First(list);
 
-        //list->last = list->first;
-/*
-        while(strcmp(list->pdi->p->name, p->name) != 1){
+        while(list->last->next!=NULL && strcmp(list->pdi->p->name, p->name) > 0){
+            printf("El nombre %s es mas pequeño que %s",list->pdi->p->name,n->p->name);
             PLIST_Next(list);
         }
-        */
-//printf("%s\n",list->pdi->p->name);
 
-        for (i = 0; i < list->nplayers || flag == 1; i++) {
-            if (list->pdi->p->name < p->name) {
-                PLIST_Next(list);
-                } else {
-                  flag = 1;
-                 }
-            }
+//printf("%s\n",list->pdi->p->name);
+//        PLIST_Go_First(list);
+//        while (flag == 0) {
+//            if (list->last->next!=NULL) {
+//                if (strcmp(list->last->next->p->name,p->name)>=0) {
+//                    list->last = list->last->next;
+//                } else {
+//                    flag = 1;
+//                }
+//            } else {
+//                flag = 1;
+//            }
+//        }
 
 
         n->next = list->pdi->next;

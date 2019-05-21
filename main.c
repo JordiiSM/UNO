@@ -10,6 +10,7 @@
 #define ERROR 0
 
 int main() {
+    int color = 0;
     int cardoption;
     int comprueba_bot;
     int turno = 1;
@@ -108,6 +109,7 @@ int main() {
 
     while(gameover != 1) {
         printf("Quedan %d cartas en la baraja \n",baraja->cuantos);
+
         printf("\n\n\n----------------------------------------------\n");
         printf("## ");
         View_Cart(pdescartes->c->carta);
@@ -128,13 +130,15 @@ int main() {
             }
         }
 
-        Info_Bots(list, turno);
 
+        Info_Bots(list, turno);
         printf("CHUPATE --> %d SENTIDO --> %d PROHIBIDO --> %d\n",chupate,sentido,prohibido);
 
 
 
         if (strcmp(list->pdi->p->type, "jugador") == 0) {
+
+            //printf("Tienes %d ROJAS %d VERDES %d AMARILLAS %d AZULES",list->pdi->p->cart.rojas,list->pdi->p->cart.verdes,list->pdi->p->cart.amarillas,list->pdi->p->cart.azules);
            do {
 
 
@@ -203,6 +207,10 @@ int main() {
             }while(comprueba_bot != OK);
 
         }
+        color = Comprobar_Cambio_Color(pdescartes,&color, list);
+                if(color == 1){
+                    CLI_escoje_color(pdescartes,list);
+                }
         Comprobar_Sentido(pdescartes->c->carta,&sentido);
         if(sentido == 0) {
             PLIST_Next(list);

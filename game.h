@@ -28,4 +28,5 @@ void Info_Bots(Playerlist *l, int turno);
 void Comprobar_Especial(Carta c, int *chupate, int *sentido, int *prohibido);
 void Comprobar_Mano(Baraja *b,Cartlist *l, int *chupate);
 void Comprobar_Sentido(Carta c, int *sentido);
+int Comprobar_Cambio_Color(Baraja *b,int *color,Playerlist *p);
 #endif
