@@ -6,7 +6,7 @@
 #include "game.h"
 
 Playerlist PLIST_Create();
-int PLIST_Insert(Playerlist *list, Player player);
+int PLIST_Insert(Playerlist *list, Player player, int *numplayers);
 int PLIST_Remove(Playerlist *list);
 Player PLIST_Get(Playerlist list);
 void PLIST_Go_First(Playerlist *list);

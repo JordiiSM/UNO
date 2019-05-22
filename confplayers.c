@@ -25,9 +25,10 @@ Playerlist PLIST_Create(){
     }
     return list;
 }
-//---------------INSERTAR----------------
-int PLIST_Insert(Playerlist *list, Player player){
 
+//---------------INSERTAR----------------
+int PLIST_Insert(Playerlist *list, Player player, int *numplayers){
+    numplayers++;
     int i;
     int flag = 0;
     Node *n = (Node *) malloc(sizeof(Node));    //reservamos memoria para un nodo
@@ -35,15 +36,21 @@ int PLIST_Insert(Playerlist *list, Player player){
     *p = player;
     //Node *tmp = (Node *) malloc(sizeof(Node));
     //control de errores
+    int tmp;
     if(list->pdi == list->last){
         return ERROR;
     }else {
         n->p = p;
         PLIST_Go_First(list);
-
-        while(list->last->next!=NULL && strcmp(list->pdi->p->name, p->name) > 0){
-            printf("El nombre %s es mas pequeño que %s",list->pdi->p->name,n->p->name);
-            PLIST_Next(list);
+        printf("Nombre pdi: %s Nombre a comparar %s \n",list->pdi->p->name, p->name);
+        //printf("list %p %p temp\n",list->pdi->p, p);
+        printf("Num players------: %d\n",*numplayers);
+        while(((list->pdi->next != list->last)||(*numplayers==1))  && strcmp(list->pdi->p->name, p->name) < 0){
+            printf("El nombre %s es mas pequeño que %s\n",list->pdi->p->name,p->name);
+            tmp = PLIST_Next(list);
+            if(strcmp(list->pdi->p->name, p->name ) < 0 && *numplayers==1){
+                *numplayers=2;
+            }
         }
 
 //printf("%s\n",list->pdi->p->name);
@@ -66,8 +73,11 @@ int PLIST_Insert(Playerlist *list, Player player){
         n->next->previous = n;
         list->pdi->next = n;
         list->pdi = n;
+
         PLIST_Go_First(list);
     }
+
+
     return OK;
 }
 //---------------ELIMINAR-----------------
