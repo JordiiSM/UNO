@@ -19,7 +19,7 @@ Baraja EMPEZAR(Baraja *pdescarte, Baraja *b);
 void VER_mano(Cartlist *c,Baraja *b, int *chupate);
 void View_Cart(Carta c);
 void Go_First(Cartlist *l);
-void Robar_Carta(Baraja *b, Cartlist *c);
+void Robar_Carta(Baraja *b, Cartlist *c, Baraja *pdescartes);
 int Comprueba_Carta(Baraja *b, Carta *c, int *chupate);
 void Play_Card(Baraja *b, Cartlist *c, int ncarta, int chupate);
 void Delete_Card(Cartlist *l);
@@ -29,4 +29,7 @@ void Comprobar_Especial(Carta c, int *chupate, int *sentido, int *prohibido);
 void Comprobar_Mano(Baraja *b,Cartlist *l, int *chupate);
 void Comprobar_Sentido(Carta c, int *sentido);
 int Comprobar_Cambio_Color(Baraja *b,int *color,Playerlist *p);
+void Comprobar_nCartas_Baraja(Baraja *baraja, Baraja *pdescartes);
+void Recargar_Baraja(Baraja *pdescartes, Baraja *baraja);
+int Comprobar_Gameover(Player *p);
 #endif

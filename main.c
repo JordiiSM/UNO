@@ -108,7 +108,9 @@ int main() {
     CARTLIST_Go_First(&list->pdi->p->cart);*/
 
     while(gameover != 1) {
+
         printf("Quedan %d cartas en la baraja \n",baraja->cuantos);
+        Comprobar_nCartas_Baraja(baraja,pdescartes);
 
         printf("\n\n\n----------------------------------------------\n");
         printf("## ");
@@ -117,7 +119,7 @@ int main() {
         Comprobar_Especial(pdescartes->c->carta,&chupate,&sentido,&prohibido);
 
         if (prohibido  == 1){
-            printf("Entra IF PROHIBIDO \n");
+           // printf("Entra IF PROHIBIDO \n");
             printf("CHUPATE --> %d SENTIDO --> %d PROHIBIDO --> %d\n",chupate,sentido,prohibido);
             Info_Bots(list, turno);
             printf("%s Se te ha saltado el turno\n",list->pdi->p->name);
@@ -135,7 +137,7 @@ int main() {
         printf("CHUPATE --> %d SENTIDO --> %d PROHIBIDO --> %d\n",chupate,sentido,prohibido);
 
 
-
+        printf("Player type: %s \n",list->pdi->p->type);
         if (strcmp(list->pdi->p->type, "jugador") == 0) {
 
             //printf("Tienes %d ROJAS %d VERDES %d AMARILLAS %d AZULES",list->pdi->p->cart.rojas,list->pdi->p->cart.verdes,list->pdi->p->cart.amarillas,list->pdi->p->cart.azules);
@@ -146,7 +148,7 @@ int main() {
                    while (chupate > 0) {
                        printf("Jugador %s roba carta\n", list->pdi->p->name);
 
-                       Robar_Carta(baraja, &list->pdi->p->cart);
+                       Robar_Carta(baraja, &list->pdi->p->cart, pdescartes);
                        chupate--;
                    }
                    CARTLIST_Go_First(&list->pdi->p->cart);
@@ -160,18 +162,26 @@ int main() {
                    if (option == 'A') {
                        cardoption = CLI_playcard();
                        Play_Card(pdescartes, &list->pdi->p->cart, cardoption, chupate);
+                       gameover = Comprobar_Gameover(list->pdi->p);
+                       color=0;
+                       color = Comprobar_Cambio_Color(pdescartes,&color, list);
+                       if(color == 1){
+                           CLI_escoje_color(pdescartes,list);
+                       }
                        comprobar_player = OK;
                        CARTLIST_Go_First(&list->pdi->p->cart);
                        option = 0;
                    }
                }
                if (option == 'B') {
-                   Robar_Carta(baraja, &list->pdi->p->cart);
+                   Robar_Carta(baraja, &list->pdi->p->cart,pdescartes);
+                   printf("Has robado: ");
+                   View_Cart(list->pdi->p->cart.pdicard->c);
                    CARTLIST_Go_First(&list->pdi->p->cart);
 
                }
            }while(comprobar_player != OK);
-
+            comprobar_player = ERROR;
 
         }else{
             do {
@@ -181,6 +191,9 @@ int main() {
                     printf("\n%s juega un ", list->pdi->p->name);
 
                     Play_Card(pdescartes, &list->pdi->p->cart, ncarta, chupate);
+                    gameover = Comprobar_Gameover(list->pdi->p);
+                    color = Comprobar_Cambio_Color(pdescartes,&color, list);
+                    color = 0;
                     //View_Cart(pdescartes->c->carta);
                     printf("\n");
                     CARTLIST_Go_First(&list->pdi->p->cart);
@@ -191,12 +204,12 @@ int main() {
                     if(chupate > 0) {
                         while (chupate > 0) {
                             printf("Jugador %s roba carta\n",list->pdi->p->name);
-                            Robar_Carta(baraja, &list->pdi->p->cart);
+                            Robar_Carta(baraja, &list->pdi->p->cart, pdescartes);
                             chupate--;
                         }
                         CARTLIST_Go_First(&list->pdi->p->cart);
                     }else {
-                        Robar_Carta(baraja, &list->pdi->p->cart);
+                        Robar_Carta(baraja, &list->pdi->p->cart, pdescartes);
                         printf("El jugador %s Ha robado ", list->pdi->p->name);
                         View_Cart(list->pdi->p->cart.pdicard->c);
                         printf("\n");
@@ -207,10 +220,7 @@ int main() {
             }while(comprueba_bot != OK);
 
         }
-        color = Comprobar_Cambio_Color(pdescartes,&color, list);
-                if(color == 1){
-                    CLI_escoje_color(pdescartes,list);
-                }
+
         Comprobar_Sentido(pdescartes->c->carta,&sentido);
         if(sentido == 0) {
             PLIST_Next(list);
@@ -231,6 +241,7 @@ int main() {
 
 
     }
+    //Estadisticas
 
 
 }

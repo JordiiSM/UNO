@@ -44,7 +44,7 @@ Playerlist ADD_Players(char f[50]) {
         }
         strcpy(tmp.name, "Jordi");
         strcpy(tmp.type,"jugador");
-        c.cartasinicio = 7;
+        c.cartasinicio = 1;
         tmp.cart = c;
         PLIST_Insert(list,tmp, &contplayers);
         fclose(file);

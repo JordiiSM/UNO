@@ -118,8 +118,8 @@ Baraja EMPEZAR(Baraja *pdescarte, Baraja *b){
     return *pdescarte;
 
 }
-void Robar_Carta(Baraja *b, Cartlist *c){
-
+void Robar_Carta(Baraja *b, Cartlist *c,Baraja *pdescartes){
+    Comprobar_nCartas_Baraja(b,pdescartes);
     CART_Insert(c, &b->c->carta);
     PILA_pop(b);
 
@@ -440,5 +440,48 @@ int Comprobar_Cambio_Color(Baraja *b,int *color,Playerlist *p) {
             }
         }
         return 0;
+    }else {
+        return 0;
     }
 }
+void Comprobar_nCartas_Baraja(Baraja *baraja, Baraja *pdescartes){
+    printf("Quedan %d cartas en la baraja \n",baraja->cuantos);
+    if (baraja->cuantos == 0){
+        printf("Se ha quedado sin cartas \n");
+        Recargar_Baraja(pdescartes, baraja);
+    }
+}
+void Recargar_Baraja(Baraja *pdescartes, Baraja *baraja){
+    printf("Recargando baraja 2 \n");
+    Carta c = pdescartes->c->carta;
+    PILA_pop(pdescartes);
+    printf("Ultima carta en la piladescartes: ");
+    View_Cart(c);
+    printf("\n");
+    for(int i = 0 ; i < pdescartes->cuantos ; i++){
+        if(pdescartes->c->carta.num != 10 && pdescartes->c->carta.num != 11) {
+            PILA_push(baraja, pdescartes->c->carta);
+        }else{
+            printf("Se ha eliminado una espedial");
+        }
+        PILA_pop(pdescartes);
+
+    }
+    PILA_push(pdescartes,c);
+
+
+
+    BARAJA_mix(baraja);
+}
+int Comprobar_Gameover(Player *p){
+
+
+        if(p->cart.ncartas == 0) {
+            printf("%s - HA GANADO!\n", p->name);
+            return 1;
+        }else{
+            return 0;
+        }
+
+    }
+

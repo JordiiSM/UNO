@@ -5,6 +5,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
+
+int get_num() {
+    char str_num[5];
+
+    fgets(str_num, 5, stdin);
+    str_num[strlen(str_num) - 1] = '\0';
+
+    return atoi(str_num);
+}
+
 int CLI_menu() {
     int option;
     printf("-------------------------------------------------------\n");
@@ -60,7 +70,7 @@ void CLI_escoje_color(Baraja *b, Playerlist *p) {
         printf("¿Que color quieres cambiar?\n");
         printf("1. Rojo\n2. Amarillo\n3. Azul\n4. Verde\n");
         printf("-------------------------------------------------------\n");
-        scanf("%d", &option);
+        option = get_num();
         printf("\n");
         switch (option) {
             case 1:
@@ -129,7 +139,7 @@ int CLI_playcard() {
     printf("Que carta deseas jugar?\n");
     printf("-------------------------------------------------------\n");
     printf("Enter an option: ");
-    scanf("%d",&cardoption );
+    cardoption = get_num();
     printf("\n");
     return cardoption;
 
