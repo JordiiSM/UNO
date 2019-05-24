@@ -144,3 +144,13 @@ int CLI_playcard() {
     return cardoption;
 
 }
+int CLI_menu_stats(){
+int option;
+printf("UNO  -   Estadisticas\n\n");
+printf("Elige el tipo de estadistica a visualizar\n");
+printf("\t1. Jugador\n\t2. Bots\n\t3. Regresar al menu principal\n");
+printf("Enter an option: ");
+scanf("%d",&option);
+printf("n");
+return option;
+}

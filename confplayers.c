@@ -42,11 +42,7 @@ int PLIST_Insert(Playerlist *list, Player player, int *numplayers){
     }else {
         n->p = p;
         PLIST_Go_First(list);
-        printf("Nombre pdi: %s Nombre a comparar %s \n",list->pdi->p->name, p->name);
-        //printf("list %p %p temp\n",list->pdi->p, p);
-        printf("Num players------: %d\n",*numplayers);
         while(((list->pdi->next != list->last)||(*numplayers==1))  && strcmp(list->pdi->p->name, p->name) < 0){
-            printf("El nombre %s es mas pequeño que %s\n",list->pdi->p->name,p->name);
             tmp = PLIST_Next(list);
             if(strcmp(list->pdi->p->name, p->name ) < 0 && *numplayers==1){
                 *numplayers=2;

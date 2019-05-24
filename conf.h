@@ -6,8 +6,9 @@
 #define MAXC 50
 
 Playerlist ADD_Players(char f[50]);
-
-
+void Stats(char f[50], Playerlist *p);
+void estadisticas_bots(Playerlist *pls, int npartidas);
+int lectura_fichero(Playerlist *p, char statsfile[50]);
 //VIEW STATS
 
 

@@ -473,11 +473,17 @@ void Recargar_Baraja(Baraja *pdescartes, Baraja *baraja){
 
     BARAJA_mix(baraja);
 }
-int Comprobar_Gameover(Player *p){
+int Comprobar_Gameover(Player *p, int *npartidas){
 
 
         if(p->cart.ncartas == 0) {
             printf("%s - HA GANADO!\n", p->name);
+            p->ganadas++;
+            npartidas++;
+            if(strcmp(p->type, "jugador") == 0){
+                //escribir fichero player
+
+            }
             return 1;
         }else{
             return 0;

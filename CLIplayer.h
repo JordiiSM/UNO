@@ -18,6 +18,7 @@ int CLI_playcard();
 char CLI_play(char *name);
 int CLI_robado(Baraja *b, Carta c);
 void CLI_escoje_color(Baraja *b, Playerlist *p);
+int CLI_menu_stats();
 
 
 #endif

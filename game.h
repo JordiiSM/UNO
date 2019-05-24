@@ -8,6 +8,7 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <conio.h>
 
 
 Playerlist Repartir(Baraja *b, Playerlist *p);
@@ -31,5 +32,6 @@ void Comprobar_Sentido(Carta c, int *sentido);
 int Comprobar_Cambio_Color(Baraja *b,int *color,Playerlist *p);
 void Comprobar_nCartas_Baraja(Baraja *baraja, Baraja *pdescartes);
 void Recargar_Baraja(Baraja *pdescartes, Baraja *baraja);
-int Comprobar_Gameover(Player *p);
+int Comprobar_Gameover(Player *p, int *npartidas);
+
 #endif

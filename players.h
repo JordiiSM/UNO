@@ -8,6 +8,7 @@ typedef struct _player{
 
     char name[MAX];
     char type[MAX];
+    int ganadas;
     Cartlist cart;
 
 
