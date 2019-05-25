@@ -9,7 +9,7 @@ Playerlist ADD_Players(char f[50]);
 void Stats(char f[50], Playerlist *p);
 void estadisticas_bots(Playerlist *pls, int npartidas);
 int lectura_fichero(Playerlist *p, char statsfile[50]);
-//VIEW STATS
+int lectura_fichero_escritura(Playerlist *list, Player *p, char statsfile[50]);
 
 
 #endif //UNTITLED1_CONF_H

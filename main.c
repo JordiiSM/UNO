@@ -121,7 +121,7 @@ int main() {
                             if (option == 'A') {
                                 cardoption = CLI_playcard();
                                 Play_Card(pdescartes, &list->pdi->p->cart, cardoption, chupate);
-                                gameover = Comprobar_Gameover(list->pdi->p, &npartidas);
+                                gameover = Comprobar_Gameover(list, list->pdi->p, &npartidas, stats);
                                 color = 0;
                                 color = Comprobar_Cambio_Color(pdescartes, &color, list);
                                 if (color == 1) {
@@ -150,7 +150,7 @@ int main() {
                             printf("\n%s juega un ", list->pdi->p->name);
 
                             Play_Card(pdescartes, &list->pdi->p->cart, ncarta, chupate);
-                            gameover = Comprobar_Gameover(list->pdi->p, &npartidas);
+                            gameover = Comprobar_Gameover(list,list->pdi->p, &npartidas, stats);
                             color = Comprobar_Cambio_Color(pdescartes, &color, list);
                             color = 0;
                             //View_Cart(pdescartes->c->carta);

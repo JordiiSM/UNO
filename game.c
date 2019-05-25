@@ -473,7 +473,7 @@ void Recargar_Baraja(Baraja *pdescartes, Baraja *baraja){
 
     BARAJA_mix(baraja);
 }
-int Comprobar_Gameover(Player *p, int *npartidas){
+int Comprobar_Gameover(Playerlist *list, Player *p, int *npartidas, char stats[50]){
 
 
         if(p->cart.ncartas == 0) {
@@ -481,8 +481,10 @@ int Comprobar_Gameover(Player *p, int *npartidas){
             p->ganadas++;
             npartidas++;
             if(strcmp(p->type, "jugador") == 0){
-                //escribir fichero player
+                lectura_fichero_escritura(list, p , stats);
 
+            }else{
+                lectura_fichero_escritura(list, p , stats);
             }
             return 1;
         }else{

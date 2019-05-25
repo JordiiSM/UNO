@@ -51,12 +51,8 @@ Playerlist ADD_Players(char f[50]) {
     PLIST_Go_First(list);
     return *list;
 }
-void lectura_fichero_player(){
 
-};
-void escritura_fichero_player(){
 
-}
 void estadisticas_bots(Playerlist *pls, int npartidas){
     printf("\n\nUNO - Estadistica de bots \n\n");
     printf("\n-----------------------------------------------------------------------------------------------------\n");
@@ -96,10 +92,13 @@ void estadisticas_bots(Playerlist *pls, int npartidas){
 
 
 
-int lectura_fichero(Playerlist *p, char statsfile[50]) {
+int lectura_fichero(Playerlist *p, char statsfile[50]) {//lectura view stats
+    int cartas_array[50];
     char nombre[50];
     char ganadaschar[50];
     char perdidaschar[50];
+    char cartas_manochar[50];
+    int cartas_mano;
     int ganadas;
     int perdidas;
     float porcwin = 0;
@@ -107,24 +106,22 @@ int lectura_fichero(Playerlist *p, char statsfile[50]) {
     int totalgames;
     char skip;
     char msg;
+    int j = 0;
     FILE *stats;
     stats = fopen(statsfile, "r");
     printf("\n-----------------------------------------------------------------------------------------------------\n");
     printf("UNO  -  Estadisticas del jugador\n");
-    for(int i = 0; i < p->nplayers; i++){
-        if(strcmp(p->pdi->p->type, "jugador") != 0){
-            PLIST_Next(p);
-        }
-    }
 
     fgets(nombre, 100, stats);
     fgets(ganadaschar, 100, stats);
-    ganadas=atoi(ganadaschar);
+    ganadas = atoi(ganadaschar);
     fgets(perdidaschar, 100, stats);
     perdidas = atoi(perdidaschar);
+
     totalgames = ganadas + perdidas;
     porcwin = (ganadas * 100) / totalgames;
     porclose = (perdidas * 100) / totalgames;
+
     printf("Nombre: %s \n\n\n",nombre);
     printf("Estadisticas de partidas\n");
     printf("Ganadas:\t.....\t%d  (%.2f)\n",ganadas,porcwin);
@@ -134,5 +131,63 @@ int lectura_fichero(Playerlist *p, char statsfile[50]) {
     while(enter!='\r' && enter !='\n'){
         enter=getchar();
     }
+    return 0;
+}
+int lectura_fichero_escritura(Playerlist *list, Player *p, char statsfile[50]) {//lectura view stats
+    int *data = malloc(sizeof (int));
+    int cartas_array[50];
+    char nombre[50];
+    char ganadaschar[50];
+    char perdidaschar[50];
+    char cartas_manochar[50];
+    int cartas_mano;
+    int ganadas;
+    int perdidas;
+    int j = 0;
+    FILE *stats;
+    stats = fopen(statsfile, "r");
+    fgets(nombre, 100, stats);
+    fgets(ganadaschar, 100, stats);
+    ganadas = atoi(ganadaschar);
+    fgets(perdidaschar, 100, stats);
+    perdidas = atoi(perdidaschar);
+   // int *tmp;
+    while(!feof(stats)){
+        fgets(cartas_manochar, 100, stats);
+        sscanf(cartas_manochar,"%d",&data[j]);
+        //data[j] = cartas_manochar;
+        j++;
+        data = realloc(data,j * sizeof(int)*2);
+
+        printf("Realloc\n");
+    }
+    //data = tmp;
+    fclose(stats);
+
+    FILE* stats_escritura;
+    stats_escritura = fopen(statsfile, "wr");
+        printf("Abre el archibo");
+        fprintf(stats_escritura, "%s", nombre);
+        if(p->type == "jugador"){
+            fprintf(stats_escritura, "%d\n", ganadas + 1);//mas la que gana
+            fprintf(stats_escritura, "%d\n", perdidas);
+        }else{
+            fprintf(stats_escritura, "%d\n", ganadas);
+            fprintf(stats_escritura, "%d\n", perdidas + 1);//mas la que pierdes
+        }
+        printf("Escritura bucle inicio");
+        for(int x = 0; x < j; x++){
+            fprintf(stats_escritura, "%d\n", data[x]);
+        }
+        PLIST_Go_First(list);
+    for(int k = 0; k < list->nplayers; k++){
+        if(strcmp(list->pdi->p->type, "jugador") != 0){
+            PLIST_Next(list);
+        }
+    }
+    fprintf(stats_escritura, "%d\n", list->pdi->p->cart.ncartas);
+
+    fclose(stats_escritura);
+    free(data);
     return 0;
 }

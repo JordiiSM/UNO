@@ -32,6 +32,6 @@ void Comprobar_Sentido(Carta c, int *sentido);
 int Comprobar_Cambio_Color(Baraja *b,int *color,Playerlist *p);
 void Comprobar_nCartas_Baraja(Baraja *baraja, Baraja *pdescartes);
 void Recargar_Baraja(Baraja *pdescartes, Baraja *baraja);
-int Comprobar_Gameover(Player *p, int *npartidas);
+int Comprobar_Gameover(Playerlist *list, Player *p, int *npartidas, char stats[50]);
 
 #endif
