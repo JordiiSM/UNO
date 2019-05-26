@@ -28,22 +28,19 @@ Playerlist ADD_Players(char f[50]) {
 
             fgets(tmp.name, 100, file);
             tmp.name[strlen(tmp.name)-1]='\0';
-            //printf("Nombre: %s \n", tmp.name);
             fgets(tmp.type, 100, file);
-            //printf("Tipo: %s \n", tmp.type);
             fgets(ncartas, 100, file);
             c.cartasinicio = atoi(ncartas);
             tmp.cart = c;
-            //printf("N cartas: %d \n", tmp.h->ncartas);
+            tmp.ganadas = 0;
             PLIST_Insert(list, tmp, &contplayers);
-           // list->pdi->p->cart.ncartas = list->pdi->p->cart.cartasinicio;
-            //printf("Nombre insertado: %s \n", list->pdi->p->name);
-            //printf("Prueba\n");
+
 
         }
         strcpy(tmp.name, "Jordi");
         strcpy(tmp.type,"jugador");
-        c.cartasinicio = 1;
+        tmp.ganadas = 0;
+        c.cartasinicio = 7;
         tmp.cart = c;
         PLIST_Insert(list,tmp, &contplayers);
         fclose(file);
@@ -78,19 +75,13 @@ void estadisticas_bots(Playerlist *pls, int npartidas){
         if(strcmp(pls->pdi->p->type, "jugador") != 0){
             printf("%s\t\t",pls->pdi->p->name);
             porcwins = (pls->pdi->p->ganadas * 100) /npartidas;
-            perdidas = npartidas - pls->pdi->p->ganadas;
+            perdidas = npartidas-1 - pls->pdi->p->ganadas;
             porcperdidas = (perdidas * 100) /npartidas;
             printf("%d\t%d\t\t\t%d\t%d\n",pls->pdi->p->ganadas, porcwins, perdidas,porcperdidas );
-
         }
         PLIST_Next(pls);
-
     }
-
 }
-
-
-
 
 int lectura_fichero(Playerlist *p, char statsfile[50]) {//lectura view stats
     int cartas_array[50];
@@ -151,17 +142,14 @@ int lectura_fichero_escritura(Playerlist *list, Player *p, char statsfile[50]) {
     ganadas = atoi(ganadaschar);
     fgets(perdidaschar, 100, stats);
     perdidas = atoi(perdidaschar);
-   // int *tmp;
+
     while(!feof(stats)){
         fgets(cartas_manochar, 100, stats);
         sscanf(cartas_manochar,"%d",&data[j]);
-        //data[j] = cartas_manochar;
         j++;
         data = realloc(data,j * sizeof(int)*2);
-
         printf("Realloc\n");
     }
-    //data = tmp;
     fclose(stats);
 
     FILE* stats_escritura;
@@ -186,7 +174,6 @@ int lectura_fichero_escritura(Playerlist *list, Player *p, char statsfile[50]) {
         }
     }
     fprintf(stats_escritura, "%d\n", list->pdi->p->cart.ncartas);
-
     fclose(stats_escritura);
     free(data);
     return 0;

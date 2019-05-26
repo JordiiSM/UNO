@@ -4,17 +4,18 @@
 
 #include <string.h>
 #include "confplayers.h"
+
 //--------------CREAR-------------------
-Playerlist PLIST_Create(){
+Playerlist PLIST_Create() {
     Playerlist list;
     Node *Ghost1;
     Node *Ghost2;
     Ghost1 = (Node *) malloc(sizeof(Node)); //creamos fantasma inicial
     Ghost2 = (Node *) malloc(sizeof(Node)); //creamos fantasma final
     //control de errores
-    if(Ghost1 == NULL || Ghost2 == NULL ){
+    if (Ghost1 == NULL || Ghost2 == NULL) {
         //error
-    }else{
+    } else {
         Ghost1->next = Ghost2;  //asigna el fantasma final al next del inicial
         Ghost1->previous = NULL;    //pone a null el anterior al inicial
         Ghost2->next = NULL;    //pone a null el siguiente al final
@@ -27,7 +28,7 @@ Playerlist PLIST_Create(){
 }
 
 //---------------INSERTAR----------------
-int PLIST_Insert(Playerlist *list, Player player, int *numplayers){
+int PLIST_Insert(Playerlist *list, Player player, int *numplayers) {
     numplayers++;
     int i;
     int flag = 0;
@@ -37,32 +38,17 @@ int PLIST_Insert(Playerlist *list, Player player, int *numplayers){
     //Node *tmp = (Node *) malloc(sizeof(Node));
     //control de errores
     int tmp;
-    if(list->pdi == list->last){
+    if (list->pdi == list->last) {
         return ERROR;
-    }else {
+    } else {
         n->p = p;
         PLIST_Go_First(list);
-        while(((list->pdi->next != list->last)||(*numplayers==1))  && strcmp(list->pdi->p->name, p->name) < 0){
+        while (((list->pdi->next != list->last) || (*numplayers == 1)) && strcmp(list->pdi->p->name, p->name) < 0) {
             tmp = PLIST_Next(list);
-            if(strcmp(list->pdi->p->name, p->name ) < 0 && *numplayers==1){
-                *numplayers=2;
+            if (strcmp(list->pdi->p->name, p->name) < 0 && *numplayers == 1) {
+                *numplayers = 2;
             }
         }
-
-//printf("%s\n",list->pdi->p->name);
-//        PLIST_Go_First(list);
-//        while (flag == 0) {
-//            if (list->last->next!=NULL) {
-//                if (strcmp(list->last->next->p->name,p->name)>=0) {
-//                    list->last = list->last->next;
-//                } else {
-//                    flag = 1;
-//                }
-//            } else {
-//                flag = 1;
-//            }
-//        }
-
 
         n->next = list->pdi->next;
         n->previous = list->pdi;
@@ -76,8 +62,8 @@ int PLIST_Insert(Playerlist *list, Player player, int *numplayers){
 
     return OK;
 }
-//---------------ELIMINAR-----------------
-/*
+
+//---------------ELIMINAR------------
 int PLIST_Remove(Playerlist *list) {
     Node *tmp;
     if (list->pdi == list->first || list->pdi == list->last) {  //estem al final
@@ -91,129 +77,118 @@ int PLIST_Remove(Playerlist *list) {
         return OK;
     }
 }
-//---------------OBTENER-----------------
-Song PLIST_Get(Playerlist list){
-    if(list.pdi == list.first || list.pdi == list.last){  //estem al final o principi
-    }else{
-        return *list.pdi->s;
-    }
-}
+
+
 //---------------IS EMPTY-----------------
-int PLIST_Is_Empty(Playerlist list){
+int PLIST_Is_Empty(Playerlist list) {
     return list.pdi == list.last; //Como si fuera un if, devuelve 0 o 1
 }
-  */
+
 //--------------IR AL PRINCIPIO DE LA LISTA ----------------------
-void PLIST_Go_First(Playerlist *list){
+void PLIST_Go_First(Playerlist *list) {
     list->pdi = list->first;
     PLIST_Next(list);
 }
 
 //-----------------PASAR AL SIGUIENTE ELEMENTO DE LA LISTA---------------
-int PLIST_Next(Playerlist *list){
-    if(list->pdi->next == list->last){  //estem al final
+int PLIST_Next(Playerlist *list) {
+    if (list->pdi->next == list->last) {  //estem al final
         return ERROR;
-    }else{
+    } else {
         list->pdi = list->pdi->next;
         return OK;
     }
 }
 
 //----------------PASAR AL ELEMENTO ANTERIOR DE LA LISTA ---------------
-int PLIST_previous(Playerlist *list){
-    if(list->pdi->previous == list->first){  //estem al final
+int PLIST_previous(Playerlist *list) {
+    if (list->pdi->previous == list->first) {  //estem al final
         return ERROR;
-    }else{
+    } else {
         list->pdi = list->pdi->previous;
         return OK;
     }
 }
-/*
+
 //---------------BORRAR LA LISTA -------------------
-void PLIST_Destroy(Playerlist *list){
+void PLIST_Destroy(Playerlist *list) {
     PLIST_Go_First(list);
-    while(!PLIST_Is_Empty(*list)){
+    while (!PLIST_Is_Empty(*list)) {
         PLIST_Remove(list);
     }
     free(list->first);     // free fantasma first
     free(list->last);      // free fantasma last
     list->first = list->last = NULL;    //asignamos null al first y last
 }
-*/
-int Comprueba_Carta_Bot(Cartlist *list, Baraja *b,Baraja *baraja, int *chupate, int *ncarta){
+
+int Comprueba_Carta_Bot(Playerlist *p, Cartlist *list, Baraja *b, Baraja *baraja, int *chupate, int *ncarta) {
     int aux = 3;
     int cont = 0;
     int flag = 0;
     int jugada = 3;
     int i;
     CARTLIST_Go_First(list);
-    for(i = 0 ; i < list->ncartas ; i++) {
-            flag = Comprueba_Carta(b,&list->pdicard->c,chupate);
-            if(flag == OK){
-                cont++;
-            }
+    for (i = 0; i < list->ncartas; i++) {
+        flag = Comprueba_Carta(b, &list->pdicard->c, chupate);
+        if (flag == OK) {
+            cont++;
+        }
 
         CARTLIST_Next(list);
 
     }
-
-
     CARTLIST_Go_First(list);
-    //printf("Puede jugar %d cartas\n",cont);
-    if(cont > 0) {
-            aux = Comprobar_Ceros(b, list, ncarta, chupate);
-            if (aux == OK){
-                printf("intentando jugar la carta  ZEROS %d \n",*ncarta);
+    if (cont > 0) {
+        if (strcmp(p->pdi->p->type, "Agresivo") == 0) {
+            aux = comprobarAgresivo(b, list, ncarta, chupate);
+            if (aux == OK) {
                 return OK;
             }
-            CARTLIST_Go_First(list);
-            aux = Comprobar_Color(b, list, b->c->carta, ncarta, chupate);
-            if (aux == OK){
-                printf("intentando jugar la carta COLOR %d \n",*ncarta);
-                return OK;
-            }
-            CARTLIST_Go_First(list);
-                /*for(int j = 1; j <= list->ncartas ; j++){
-                    flag = Comprueba_Carta(b,&list->pdicard->c,chupate);
-                    if(flag == OK){
-                        printf("intentando jugar la carta OTROS %d \n",*ncarta);
-                        *ncarta = j;
-                        return OK;
-                    }
-                }*/
-            aux = Comprobar_OTROS(b, list, b->c->carta, ncarta, chupate);
-            if (aux == OK){
-                printf("intentando jugar la carta OTROS %d \n",*ncarta);
-                return OK;
-            }
+        }
         CARTLIST_Go_First(list);
-            }
-    if(cont == 0){
+        aux = Comprobar_Ceros(b, list, ncarta, chupate);
+        if (aux == OK) {
+            return OK;
+        }
+        CARTLIST_Go_First(list);
+        aux = Comprobar_Color(b, list, b->c->carta, ncarta, chupate);
+        if (aux == OK) {
+            return OK;
+        }
+        CARTLIST_Go_First(list);
+        aux = Comprobar_OTROS(p, b, list, b->c->carta, ncarta, chupate);
+        if (aux == OK) {
+            return OK;
+        }
+        CARTLIST_Go_First(list);
         return ERROR;
     }
-    return OK;
+
+    if (cont == 0) {
+        return ERROR;
+    }
 
 }
 
-int Comprobar_Ceros(Baraja *b, Cartlist *list, int *ncarta, int *chupate){
-    int i=0;
+int Comprobar_Ceros(Baraja *b, Cartlist *list, int *ncarta, int *chupate) {
+    int i = 0;
     int flag;
-    for(i = 1 ; i <= list->ncartas; i++) {
-       View_Cart(list->pdicard->c);
+    for (i = 1; i <= list->ncartas; i++) {
+        View_Cart(list->pdicard->c);
         if (list->pdicard->c.num == 0) {
             flag = Comprueba_Carta(b, &list->pdicard->c, chupate);
 
             printf("\n");
-            if(flag == OK){
+            if (flag == OK) {
 
                 *ncarta = i;
 
                 CARTLIST_Go_First(list);
                 return OK;
-            }else{
+            } else {
                 CARTLIST_Next(list);
             }
-        }else {
+        } else {
             CARTLIST_Next(list);
         }
     }
@@ -222,15 +197,14 @@ int Comprobar_Ceros(Baraja *b, Cartlist *list, int *ncarta, int *chupate){
 }
 
 
-
-int Comprobar_Color(Baraja *b, Cartlist *list, Carta c, int *ncarta, int *chupate){
+int Comprobar_Color(Baraja *b, Cartlist *list, Carta c, int *ncarta, int *chupate) {
     int flag;
-    for(int i = 1 ; i <= list->ncartas; i++) {
-        if (strcmp(list->pdicard->c.color,c.color)==0) {
+    for (int i = 1; i <= list->ncartas; i++) {
+        if (strcmp(list->pdicard->c.color, c.color) == 0) {
             flag = Comprueba_Carta(b, &list->pdicard->c, chupate);
 
             printf("\n");
-            if(flag == OK) {
+            if (flag == OK) {
 
                 *ncarta = i;
 
@@ -238,24 +212,21 @@ int Comprobar_Color(Baraja *b, Cartlist *list, Carta c, int *ncarta, int *chupat
                 return OK;
             }
 
-        }else{
+        } else {
             CARTLIST_Next(list);
         }
     }
     CARTLIST_Go_First(list);
     return ERROR;
 }
-int Comprobar_OTROS(Baraja *b, Cartlist *list, Carta c, int *ncarta, int *chupate) {
+
+int Comprobar_OTROS(Playerlist *p, Baraja *b, Cartlist *list, Carta c, int *ncarta, int *chupate) {
     int flag;
     for (int i = 1; i <= list->ncartas; i++) {
-
         flag = Comprueba_Carta(b, &list->pdicard->c, chupate);
-
         printf("\n");
         if (flag == OK) {
-
             *ncarta = i;
-
             CARTLIST_Go_First(list);
             return OK;
         }
@@ -263,6 +234,28 @@ int Comprobar_OTROS(Baraja *b, Cartlist *list, Carta c, int *ncarta, int *chupat
         CARTLIST_Next(list);
     }
 
+    CARTLIST_Go_First(list);
+    return ERROR;
+}
+
+int comprobarAgresivo(Baraja *b, Cartlist *list, int *ncarta, int *chupate) {
+    int i = 0;
+    int flag;
+    for (i = 1; i <= list->ncartas; i++) {
+        if (list->pdicard->c.especial == 4 || list->pdicard->c.especial == 5) {
+            flag = Comprueba_Carta(b, &list->pdicard->c, chupate);
+            printf("\n");
+            if (flag == OK) {
+                *ncarta = i;
+                CARTLIST_Go_First(list);
+                return OK;
+            } else {
+                CARTLIST_Next(list);
+            }
+        } else {
+            CARTLIST_Next(list);
+        }
+    }
     CARTLIST_Go_First(list);
     return ERROR;
 }

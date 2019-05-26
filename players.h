@@ -4,7 +4,7 @@
 #include "hands.h"
 
 
-typedef struct _player{
+typedef struct _player {
 
     char name[MAX];
     char type[MAX];
@@ -12,24 +12,21 @@ typedef struct _player{
     Cartlist cart;
 
 
-}Player;
+} Player;
 
 typedef struct _node {
-
     struct _player *p;
     struct _node *next;
     struct _node *previous;
 
+} Node;
 
-}Node;
-
-typedef struct{
-
+typedef struct {
     Node *first;
     Node *pdi;
     Node *last;
     int nplayers;
 
-}Playerlist;
+} Playerlist;
 
 #endif //UNTITLED1_PLAYERS_H

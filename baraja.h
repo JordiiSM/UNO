@@ -32,7 +32,7 @@ void PILA_push(Baraja *p, Carta c);
 void PILA_pop(Baraja *p);
 int PILA_top(Baraja p);
 int PILA_vacia(Baraja p);
-void PILA_destruye(Baraja *p);
+void PILA_destruye(Baraja *b);
 
 
 #endif //UNTITLED1_BARAJA_H

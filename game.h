@@ -33,5 +33,9 @@ int Comprobar_Cambio_Color(Baraja *b,int *color,Playerlist *p);
 void Comprobar_nCartas_Baraja(Baraja *baraja, Baraja *pdescartes);
 void Recargar_Baraja(Baraja *pdescartes, Baraja *baraja);
 int Comprobar_Gameover(Playerlist *list, Player *p, int *npartidas, char stats[50]);
+void endGame(Playerlist *p, Baraja *b, Baraja *descartes);
+void borrarListaCartas(Cartlist *list);
+void Play_Card_Robada(Baraja *b, Cartlist *l,Carta *c, int chupate);
 
+        int Cart_Is_Empty(Cartlist list);
 #endif
