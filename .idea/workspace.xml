@@ -10,10 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="35716085-a3d4-4ae9-9d81-03e5a6a92649" name="Default Changelist" comment="Beta 1.7 Cambio de sentido">
-      <change beforePath="$PROJECT_DIR$/CLIplayer.c" beforeDir="false" afterPath="$PROJECT_DIR$/CLIplayer.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baraja.c" beforeDir="false" afterPath="$PROJECT_DIR$/baraja.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/conf.c" beforeDir="false" afterPath="$PROJECT_DIR$/conf.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/conf.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/confplayers.c" beforeDir="false" afterPath="$PROJECT_DIR$/confplayers.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game.c" beforeDir="false" afterPath="$PROJECT_DIR$/game.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
@@ -36,7 +33,7 @@
             <entry file="file://$PROJECT_DIR$/conf.h">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="187">
-                  <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
+                  <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
                   <folding>
                     <element signature="e#51#71#0" expanded="true" />
                   </folding>
@@ -44,11 +41,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/main.c">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1513">
-                  <caret line="230" column="29" selection-start-line="230" selection-start-column="29" selection-end-line="230" selection-end-column="29" />
+                <state relative-caret-position="175">
+                  <caret line="190" column="67" lean-forward="true" selection-start-line="190" selection-start-column="67" selection-end-line="190" selection-end-column="67" />
                 </state>
               </provider>
             </entry>
@@ -62,16 +59,16 @@
             <entry file="file://$PROJECT_DIR$/fichero_bots.uno">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="102">
-                  <caret line="6" column="1" lean-forward="true" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+                  <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/confplayers.c">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="172">
-                  <caret line="237" column="90" selection-start-line="237" selection-start-column="90" selection-end-line="237" selection-end-column="90" />
+                <state relative-caret-position="323">
+                  <caret line="184" column="20" lean-forward="true" selection-start-line="184" selection-start-column="20" selection-end-line="184" selection-end-column="20" />
                 </state>
               </provider>
             </entry>
@@ -79,7 +76,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/CLIplayer.c">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="2482">
+                <state relative-caret-position="458">
                   <caret line="146" column="22" selection-start-line="146" selection-start-column="22" selection-end-line="146" selection-end-column="22" />
                 </state>
               </provider>
@@ -97,7 +94,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/game.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="374">
+                <state relative-caret-position="476">
                   <caret line="37" column="52" selection-start-line="37" selection-start-column="52" selection-end-line="37" selection-end-column="52" />
                 </state>
               </provider>
@@ -106,8 +103,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/conf.c">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-508">
-                  <caret line="126" column="125" selection-start-line="126" selection-start-column="125" selection-end-line="126" selection-end-column="125" />
+                <state relative-caret-position="187">
+                  <caret line="136" column="14" lean-forward="true" selection-start-line="136" selection-start-column="14" selection-end-line="136" selection-end-column="14" />
                 </state>
               </provider>
             </entry>
@@ -115,7 +112,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/players.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="390">
+                <state relative-caret-position="544">
                   <caret line="32" selection-start-line="32" selection-end-line="32" />
                 </state>
               </provider>
@@ -140,8 +137,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/game.c">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="158">
-                  <caret line="498" column="73" selection-start-line="498" selection-start-column="73" selection-end-line="498" selection-end-column="73" />
+                <state relative-caret-position="153">
+                  <caret line="164" column="12" selection-start-line="164" selection-start-column="8" selection-end-line="164" selection-end-column="12" />
                   <folding>
                     <element signature="e#0#17#0" expanded="true" />
                   </folding>
@@ -166,8 +163,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/baraja.c">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="2057">
-                  <caret line="121" column="102" selection-start-line="121" selection-start-column="102" selection-end-line="121" selection-end-column="102" />
+                <state relative-caret-position="153">
+                  <caret line="13" column="106" selection-start-line="13" selection-start-column="106" selection-end-line="13" selection-end-column="106" />
                 </state>
               </provider>
             </entry>
@@ -176,7 +173,7 @@
             <entry file="file://$PROJECT_DIR$/baraja.h">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="578">
-                  <caret line="34" column="30" lean-forward="true" selection-start-line="34" selection-start-column="30" selection-end-line="34" selection-end-column="30" />
+                  <caret line="34" column="30" selection-start-line="34" selection-start-column="30" selection-end-line="34" selection-end-column="30" />
                 </state>
               </provider>
             </entry>
@@ -187,11 +184,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>CLI_escoje_color(pdescartes,list)</find>
-      <find>CLI_escoje_color(pdescartes,list</find>
-      <find>Comprobar_Cambio_</find>
-      <find>color</find>
-      <find>VIEW</find>
       <find>COLOR</find>
       <find>roba</find>
       <find>robar</find>
@@ -217,6 +209,11 @@
       <find>borrar</find>
       <find>entra</find>
       <find>stats</find>
+      <find>juega</find>
+      <find>juega un</find>
+      <find>juega</find>
+      <find>CHUPA</find>
+      <find>VIEW</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -235,20 +232,20 @@
         <option value="$PROJECT_DIR$/players.h" />
         <option value="$PROJECT_DIR$/game.h" />
         <option value="$PROJECT_DIR$/conf.h" />
-        <option value="$PROJECT_DIR$/game.c" />
         <option value="$PROJECT_DIR$/baraja.c" />
         <option value="$PROJECT_DIR$/CLIplayer.c" />
         <option value="$PROJECT_DIR$/conf.c" />
-        <option value="$PROJECT_DIR$/confplayers.c" />
         <option value="$PROJECT_DIR$/main.c" />
+        <option value="$PROJECT_DIR$/game.c" />
+        <option value="$PROJECT_DIR$/confplayers.c" />
       </list>
     </option>
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-9" />
-    <option name="width" value="978" />
-    <option name="height" value="1039" />
+    <option name="x" value="-10" />
+    <option name="width" value="979" />
+    <option name="height" value="1040" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -256,6 +253,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -267,7 +265,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -313,6 +310,7 @@
       <workItem from="1558024942739" duration="40326000" />
       <workItem from="1558259917382" duration="74640000" />
       <workItem from="1558798039667" duration="27376000" />
+      <workItem from="1558892861794" duration="466000" />
     </task>
     <task id="LOCAL-00001" summary="Beta 1.0 Empezar juego">
       <created>1558016009600</created>
@@ -325,13 +323,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="221895000" />
+    <option name="totallyTimeSpent" value="222361000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49858356" visible="true" weight="0.1328859" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49858356" visible="true" weight="0.13489933" />
       <window_info id="Structure" order="1" sideWeight="0.50141644" side_tool="true" weight="0.16577181" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -437,39 +435,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/confplayers.h">
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fichero_bots.uno">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
-          <folding>
-            <element signature="e#65#85#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="102">
+          <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/makefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="49" selection-start-line="2" selection-start-column="49" selection-end-line="2" selection-end-column="49" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/players.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
+        <state relative-caret-position="544">
           <caret line="32" selection-start-line="32" selection-end-line="32" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/game.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="37" column="52" selection-start-line="37" selection-start-column="52" selection-end-line="37" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/conf.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
-          <folding>
-            <element signature="e#51#71#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/stats_player.uno">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/hands.h">
       <provider selected="true" editor-type-id="text-editor">
@@ -481,55 +472,69 @@
     <entry file="file://$PROJECT_DIR$/baraja.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="578">
-          <caret line="34" column="30" lean-forward="true" selection-start-line="34" selection-start-column="30" selection-end-line="34" selection-end-column="30" />
+          <caret line="34" column="30" selection-start-line="34" selection-start-column="30" selection-end-line="34" selection-end-column="30" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/stats_player.uno">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/makefile">
+    <entry file="file://$PROJECT_DIR$/main.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="49" selection-start-line="2" selection-start-column="49" selection-end-line="2" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fichero_bots.uno">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="1" lean-forward="true" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+        <state relative-caret-position="175">
+          <caret line="190" column="67" lean-forward="true" selection-start-line="190" selection-start-column="67" selection-end-line="190" selection-end-column="67" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CLIplayer.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2482">
+        <state relative-caret-position="458">
           <caret line="146" column="22" selection-start-line="146" selection-start-column="22" selection-end-line="146" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/conf.c">
+    <entry file="file://$PROJECT_DIR$/confplayers.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-508">
-          <caret line="126" column="125" selection-start-line="126" selection-start-column="125" selection-end-line="126" selection-end-column="125" />
+        <state relative-caret-position="238">
+          <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+          <folding>
+            <element signature="e#65#85#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/baraja.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2057">
-          <caret line="121" column="102" selection-start-line="121" selection-start-column="102" selection-end-line="121" selection-end-column="102" />
+        <state relative-caret-position="153">
+          <caret line="13" column="106" selection-start-line="13" selection-start-column="106" selection-end-line="13" selection-end-column="106" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conf.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="136" column="14" lean-forward="true" selection-start-line="136" selection-start-column="14" selection-end-line="136" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/game.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="37" column="52" selection-start-line="37" selection-start-column="52" selection-end-line="37" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conf.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
+          <folding>
+            <element signature="e#51#71#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/game.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="498" column="73" selection-start-line="498" selection-start-column="73" selection-end-line="498" selection-end-column="73" />
+        <state relative-caret-position="153">
+          <caret line="164" column="12" selection-start-line="164" selection-start-column="8" selection-end-line="164" selection-end-column="12" />
           <folding>
             <element signature="e#0#17#0" expanded="true" />
           </folding>
@@ -538,15 +543,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/confplayers.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="237" column="90" selection-start-line="237" selection-start-column="90" selection-end-line="237" selection-end-column="90" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1513">
-          <caret line="230" column="29" selection-start-line="230" selection-start-column="29" selection-end-line="230" selection-end-column="29" />
+        <state relative-caret-position="323">
+          <caret line="184" column="20" lean-forward="true" selection-start-line="184" selection-start-column="20" selection-end-line="184" selection-end-column="20" />
         </state>
       </provider>
     </entry>

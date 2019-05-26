@@ -256,8 +256,6 @@ void Play_Card(Baraja *b, Cartlist *c, int ncarta, int chupate) {
         for (i = 1; i < ncarta; i++) {
             CARTLIST_Next(c);
         }
-        printf("Chupate ---------> %d\n", chupate);
-        printf("intentando jugar la carta %d \n", ncarta);
         comp = Comprueba_Carta(b, &c->pdicard->c, &chupate);
         if (comp == ERROR) {
             View_Cart(c->pdicard->c);

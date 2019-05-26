@@ -169,8 +169,6 @@ int main(int argc, char **argv) {
                     comprueba_bot = Comprueba_Carta_Bot(list, &list->pdi->p->cart, pdescartes, baraja, &chupate,
                                                         &ncarta);
                     if (comprueba_bot == OK) {
-                        printf("\n%s juega un ", list->pdi->p->name);
-
                         Play_Card(pdescartes, &list->pdi->p->cart, ncarta, chupate);
                         gameover = Comprobar_Gameover(list, list->pdi->p, &npartidas, argv[2]);
                         color = Comprobar_Cambio_Color(pdescartes, &color, list);
@@ -189,9 +187,7 @@ int main(int argc, char **argv) {
                             CARTLIST_Go_First(&list->pdi->p->cart);
                         } else {
                             Robar_Carta(baraja, &list->pdi->p->cart, pdescartes);
-                            printf("El jugador %s Ha robado ", list->pdi->p->name);
-
-                            printf("\n");
+                            printf("El jugador %s Ha robado \n", list->pdi->p->name);
                             CARTLIST_Go_First(&list->pdi->p->cart);
                         }
                     }

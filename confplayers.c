@@ -172,7 +172,6 @@ int Comprobar_Ceros(Baraja *b, Cartlist *list, int *ncarta, int *chupate) {
     int i = 0;
     int flag;
     for (i = 1; i <= list->ncartas; i++) {
-        View_Cart(list->pdicard->c);
         if (list->pdicard->c.num == 0) {
             flag = Comprueba_Carta(b, &list->pdicard->c, chupate);
 
