@@ -14,7 +14,7 @@ int get_num() {
 
     return atoi(str_num);
 }
-
+//MUNU RPINCIPAL DEL JUEGO
 int CLI_menu() {
     int option;
     printf("-------------------------------------------------------\n");
@@ -26,22 +26,19 @@ int CLI_menu() {
     return option;
 
 }
+//MENU DEL JUGADOR
 char CLI_player(char *name) {
     char tmp;
-
-    char skip;
     printf("-------------------------------------------------------\n");
     printf("%s escoge una acción:\n",name);
     printf("A. Ver mano\nB. Robar carta\n");
     printf("-------------------------------------------------------\n");
-
-    scanf("%c%c",&tmp,&skip);
+    scanf("%c",&tmp);
     fflushnou();
-    printf("\n");
-    printf("Has escogido la opcion: %c \n",tmp);
     return tmp;
 
 }
+//MENU DEL JUGADOR AL ROBAR UNA CARTA
 int CLI_robado(Baraja *b, Carta c) {
     char tmp;
 
@@ -61,6 +58,7 @@ int CLI_robado(Baraja *b, Carta c) {
     return tmp;
 
 }
+//MENU DEL JUGADOR PARA ELEGIR UN COLOR
 void CLI_escoje_color(Baraja *b, Playerlist *p) {
    Carta c;
    c.especial = 0;
@@ -120,6 +118,7 @@ void CLI_escoje_color(Baraja *b, Playerlist *p) {
         }
     }while(option > 4 || option < 1);
 }
+//MENU ACCION DEL JUGADOR
 char CLI_play(char *name) {
     char tmp;
     char skip;
@@ -133,6 +132,7 @@ char CLI_play(char *name) {
     return tmp;
 
 }
+//MENU DE JUGAR UNA CARTA
 int CLI_playcard() {
     int cardoption;
     printf("-------------------------------------------------------\n");
@@ -144,6 +144,7 @@ int CLI_playcard() {
     return cardoption;
 
 }
+//MENU DE ESTADISTICAS
 int CLI_menu_stats(){
 int option;
 printf("UNO  -   Estadisticas\n\n");

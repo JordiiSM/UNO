@@ -35,8 +35,6 @@ int PLIST_Insert(Playerlist *list, Player player, int *numplayers) {
     Node *n = (Node *) malloc(sizeof(Node));    //reservamos memoria para un nodo
     Player *p = (Player *) malloc(sizeof(Player));    //reservamos para una cancion
     *p = player;
-    //Node *tmp = (Node *) malloc(sizeof(Node));
-    //control de errores
     int tmp;
     if (list->pdi == list->last) {
         return ERROR;
@@ -120,7 +118,7 @@ void PLIST_Destroy(Playerlist *list) {
     free(list->last);      // free fantasma last
     list->first = list->last = NULL;    //asignamos null al first y last
 }
-
+// Comprobar las cartas que pueden tirar los bots
 int Comprueba_Carta_Bot(Playerlist *p, Cartlist *list, Baraja *b, Baraja *baraja, int *chupate, int *ncarta) {
     int aux = 3;
     int cont = 0;
@@ -169,7 +167,7 @@ int Comprueba_Carta_Bot(Playerlist *p, Cartlist *list, Baraja *b, Baraja *baraja
     }
 
 }
-
+//Comprobacion en caso de que sea un 0 la ultima carta de la pila de descartes
 int Comprobar_Ceros(Baraja *b, Cartlist *list, int *ncarta, int *chupate) {
     int i = 0;
     int flag;
@@ -196,7 +194,7 @@ int Comprobar_Ceros(Baraja *b, Cartlist *list, int *ncarta, int *chupate) {
     return ERROR;
 }
 
-
+// Comprobar color de la ultima carta de la pila de descartes
 int Comprobar_Color(Baraja *b, Cartlist *list, Carta c, int *ncarta, int *chupate) {
     int flag;
     for (int i = 1; i <= list->ncartas; i++) {
@@ -219,7 +217,7 @@ int Comprobar_Color(Baraja *b, Cartlist *list, Carta c, int *ncarta, int *chupat
     CARTLIST_Go_First(list);
     return ERROR;
 }
-
+// Comprobar numero y especiales de la mano comparandola con la ultima carta de la pila de descartes
 int Comprobar_OTROS(Playerlist *p, Baraja *b, Cartlist *list, Carta c, int *ncarta, int *chupate) {
     int flag;
     for (int i = 1; i <= list->ncartas; i++) {
@@ -237,7 +235,7 @@ int Comprobar_OTROS(Playerlist *p, Baraja *b, Cartlist *list, Carta c, int *ncar
     CARTLIST_Go_First(list);
     return ERROR;
 }
-
+// en caso de que el jugador sea agresivo intentar tirar las especiales cuando sea posible
 int comprobarAgresivo(Baraja *b, Cartlist *list, int *ncarta, int *chupate) {
     int i = 0;
     int flag;

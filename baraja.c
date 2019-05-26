@@ -11,7 +11,7 @@ Baraja PILA_crea() {
     return p;
 }
 
-Baraja PILA_rellenar(Baraja *p) {
+Baraja PILA_rellenar(Baraja *p) {   //metodo para relllenar la pila de cartas al empezar la parida o al jugar nueva partida
     Carta c;
     int i = 0, j = 0;
 
@@ -99,7 +99,7 @@ void BARAJA_mix(Baraja *p) {
 
 }
 
-void PILA_push(Baraja *p, Carta c) {
+void PILA_push(Baraja *p, Carta c) { //colocamos la carta en la pila
 
     NodeCart *aux = malloc(sizeof(NodeCart));
     aux->carta = c;
@@ -111,7 +111,7 @@ void PILA_push(Baraja *p, Carta c) {
 }
 
 
-void PILA_pop(Baraja *p) {
+void PILA_pop(Baraja *p) { // sacamos la carta de la pila
     NodeCart *tmp;
     tmp = p->c;
     p->c = p->c->next;
@@ -119,7 +119,7 @@ void PILA_pop(Baraja *p) {
     free(tmp);
 }
 
-void PILA_destruye(Baraja *b) {
+void PILA_destruye(Baraja *b) { // borramos la pila entera para iniciarla otra vez en la nueva partida
     NodeCart *aux;
     while (b->cuantos != 0) {
         PILA_pop(b);

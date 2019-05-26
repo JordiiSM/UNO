@@ -5,8 +5,8 @@
 #include "conf.h"
 
 
-//falta pasar fichero por argumento
-Playerlist ADD_Players(char f[50]) {
+
+Playerlist ADD_Players(char f[50]) { //Agregar jugadores a la lista de players
     char ncartas[50], nplayers[50];
     int i, numplayers;
     int contplayers = 1;
@@ -50,7 +50,7 @@ Playerlist ADD_Players(char f[50]) {
 }
 
 
-void estadisticas_bots(Playerlist *pls, int npartidas){
+void estadisticas_bots(Playerlist *pls, int npartidas){ //Muestra las estadisticas de los bots
     printf("\n\nUNO - Estadistica de bots \n\n");
     printf("\n-----------------------------------------------------------------------------------------------------\n");
     printf("Nombre\t\t\t\tP.Ganadas\t\t\t\tP.Perdidas\n");
@@ -124,7 +124,7 @@ int lectura_fichero(Playerlist *p, char statsfile[50]) {//lectura view stats
     }
     return 0;
 }
-int lectura_fichero_escritura(Playerlist *list, Player *p, char statsfile[50]) {//lectura view stats
+void lectura_fichero_escritura(Playerlist *list, Player *p, char statsfile[50]) {//lectura y escritura del fichero de players
     int *data = malloc(sizeof (int));
     int cartas_array[50];
     char nombre[50];
@@ -176,5 +176,4 @@ int lectura_fichero_escritura(Playerlist *list, Player *p, char statsfile[50]) {
     fprintf(stats_escritura, "%d\n", list->pdi->p->cart.ncartas);
     fclose(stats_escritura);
     free(data);
-    return 0;
 }

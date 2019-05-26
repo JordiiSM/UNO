@@ -455,25 +455,19 @@ int Comprobar_Cambio_Color(Baraja *b, int *color, Playerlist *p) {
 }
 
 void Comprobar_nCartas_Baraja(Baraja *baraja, Baraja *pdescartes) {
-    printf("Quedan %d cartas en la baraja \n", baraja->cuantos);
+
     if (baraja->cuantos == 0) {
-        printf("Se ha quedado sin cartas \n");
         Recargar_Baraja(pdescartes, baraja);
     }
 }
 
 void Recargar_Baraja(Baraja *pdescartes, Baraja *baraja) {
-    printf("Recargando baraja 2 \n");
     Carta c = pdescartes->c->carta;
     PILA_pop(pdescartes);
-    printf("Ultima carta en la piladescartes: ");
-    View_Cart(c);
-    printf("\n");
     for (int i = 0; i < pdescartes->cuantos; i++) {
         if (pdescartes->c->carta.num != 10 && pdescartes->c->carta.num != 11) {
             PILA_push(baraja, pdescartes->c->carta);
         } else {
-            printf("Se ha eliminado una espedial");
         }
         PILA_pop(pdescartes);
     }
@@ -502,7 +496,7 @@ int Comprobar_Gameover(Playerlist *list, Player *p, int *npartidas, char stats[5
 }
 
 
-void borrarListaCartas(Cartlist *list) {
+void borrarListaCartas(Cartlist *list) {    //Borra la la lista de cartas
 
     for (int i = 0; i < list->ncartas; i++) {
         Delete_Card(list);

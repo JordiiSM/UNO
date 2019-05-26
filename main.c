@@ -10,7 +10,7 @@
 #define OK 1
 #define ERROR 0
 
-int main() {
+int main(int argc, char **argv) {
     int quieresjugarla = 0;
     int optionmenu = 5;
     int optionmenu2 = 5;
@@ -35,14 +35,8 @@ int main() {
     list = malloc(sizeof(Playerlist));
     Baraja *baraja;
     Baraja *pdescartes;
-    char stats[50]; //esto es temporal, se pasa por argumento
-    strcpy(stats, "stats_player.uno");
-    char f[50]; //esto es temporal, se pasa por argumento
-    strcpy(f, "fichero_bots.uno");
-
     *list = PLIST_Create();
-    printf("Ha entrado CREA PLIST\n ");
-    *list = ADD_Players("fichero_bots.uno");
+    *list = ADD_Players(argv[1]);
 
     do {
 
@@ -60,10 +54,8 @@ int main() {
                 size = baraja->cuantos;
 
                 PLIST_Go_First(list);
-                printf("----------------------------------------------\n");
                 BARAJA_mix(baraja);
                 *list = Repartir(baraja, list);
-                printf("Pruebaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!\n");
                 *pdescartes = EMPEZAR(pdescartes, baraja);
                 gameover = 0;
             }
@@ -71,7 +63,7 @@ int main() {
                 while (optionmenu != 3) {
                     optionmenu = CLI_menu_stats();
                     if (optionmenu == 1) {
-                        lectura_fichero(list, stats);
+                        lectura_fichero(list, argv[2]);
                         option = 0;
                     }
                     if (optionmenu == 2) {
@@ -86,7 +78,6 @@ int main() {
 
         while (gameover != 1 && optionmenu2 == 1) {
 
-            printf("Quedan %d cartas en la baraja \n", baraja->cuantos);
             Comprobar_nCartas_Baraja(baraja, pdescartes);
 
             printf("\n\n\n----------------------------------------------\n");
@@ -96,7 +87,6 @@ int main() {
             Comprobar_Especial(pdescartes->c->carta, &chupate, &sentido, &prohibido);
 
             if (prohibido == 1) {
-                // printf("Entra IF PROHIBIDO \n");
                 printf("CHUPATE --> %d SENTIDO --> %d PROHIBIDO --> %d\n", chupate, sentido, prohibido);
                 Info_Bots(list, turno);
                 printf("%s Se te ha saltado el turno\n", list->pdi->p->name);
@@ -130,7 +120,7 @@ int main() {
                         if (option == 'A') {
                             cardoption = CLI_playcard();
                             Play_Card(pdescartes, &list->pdi->p->cart, cardoption, chupate);
-                            gameover = Comprobar_Gameover(list, list->pdi->p, &npartidas, stats);
+                            gameover = Comprobar_Gameover(list, list->pdi->p, &npartidas, argv[2]);
                             color = 0;
                             color = Comprobar_Cambio_Color(pdescartes, &color, list);
                             if (color == 1) {
@@ -145,16 +135,17 @@ int main() {
                         Robar_Carta(baraja, &list->pdi->p->cart, pdescartes);
                         printf("Has robado: ");
                         View_Cart(list->pdi->p->cart.pdicard->c);
-                        aux = Comprueba_Carta(baraja, &list->pdi->p->cart.pdicard->c,&chupate);
-                        if(aux == OK){
+                        aux = Comprueba_Carta(baraja, &list->pdi->p->cart.pdicard->c, &chupate);
+                        if (aux == OK) {
                             printf("Quieres jugarla? \n1 - si\n 2 - no \n");
-                            scanf("%d",&quieresjugarla);
-                            if(quieresjugarla == 1){
-                                Play_Card_Robada(pdescartes, &list->pdi->p->cart, &list->pdi->p->cart.pdicard->c, chupate);
-                                gameover = Comprobar_Gameover(list, list->pdi->p, &npartidas, stats);
+                            scanf("%d", &quieresjugarla);
+                            if (quieresjugarla == 1) {
+                                Play_Card_Robada(pdescartes, &list->pdi->p->cart, &list->pdi->p->cart.pdicard->c,
+                                                 chupate);
+                                gameover = Comprobar_Gameover(list, list->pdi->p, &npartidas, argv[2]);
                                 comprobar_player = OK;
                                 CARTLIST_Go_First(&list->pdi->p->cart);
-                            }else{
+                            } else {
                                 CARTLIST_Go_First(&list->pdi->p->cart);
                             }
                             quieresjugarla = 0;
@@ -181,7 +172,7 @@ int main() {
                         printf("\n%s juega un ", list->pdi->p->name);
 
                         Play_Card(pdescartes, &list->pdi->p->cart, ncarta, chupate);
-                        gameover = Comprobar_Gameover(list, list->pdi->p, &npartidas, stats);
+                        gameover = Comprobar_Gameover(list, list->pdi->p, &npartidas, argv[2]);
                         color = Comprobar_Cambio_Color(pdescartes, &color, list);
                         color = 0;
                         printf("\n");
@@ -226,11 +217,7 @@ int main() {
                     turno = list->nplayers;
                 }
             }
-
-
         }
-
-
         PILA_destruye(baraja);
         free(baraja);
         PILA_destruye(pdescartes);
@@ -239,12 +226,9 @@ int main() {
         for (int k = 0; k < list->nplayers; k++) {
             printf("%s \n", list->pdi->p->name);
             borrarListaCartas(&list->pdi->p->cart);
-            //free(list->pdi->p->cart);
             PLIST_Next(list);
         }
         PLIST_Go_First(list);
-
-
     } while (optionmenu2 != 3);
     PLIST_Destroy(list);
     return 0;
